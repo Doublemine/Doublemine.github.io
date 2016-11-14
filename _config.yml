@@ -12,7 +12,7 @@ timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://notes.wanghao.work
+url: https://notes.wanghao.work
 root: /
 # 设置永久链接
 permalink: :year-:month-:day-:title.html
@@ -80,7 +80,7 @@ tag_generator:
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: next
+theme: hexo-theme-next
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html

@@ -11,4 +11,3 @@ Disallow: /vendors/
 Disallow: /fancybox/
 
 Sitemap: https://notes.wanghao.work/sitemap.xml
-Sitemap: https://notes.wanghao.work/baidusitemap.xml

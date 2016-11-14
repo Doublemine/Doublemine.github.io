@@ -6,19 +6,23 @@ tags: Hexo
 categories: Hexo
 ---
 
-###前言899
+
+
+### 前言
+
+---
 
 由于最近在折腾Android项目，需要用到一些与服务器交互、以及数据存储的相关功能，然后发现了[LeanCloud](https://leancloud.cn)这家服务提供商,使用下来还感觉还挺靠谱的(请给我广告费)。正好发现他们服务提供了[JavaScript SDK](https://leancloud.cn/docs/js_guide.html)，于是就想着尝试着实现Hexo博客文章的浏览数统计功能，之前虽然在使用不蒜子，但是不蒜子不能够在主页展示文章阅读量啊！对于博主这种有强迫症又想装X的人来说果断不能忍啊！
 
 
 
-~~###修改NexT主题模版~~
+### ~~修改NexT主题模版~~
 
 ~~本方法理论上对Hexo博客通用，由于博主使用的是NexT主题，所以当然针对NexT来说咯。~~**<font color=red>NexT主题目前已经合并这个Feature，因此如果你使用的是NexT主题，可以直接使用不用修改主题模版而直接在`_config.yml`中配置即可，请直接跳转查看[配置LeanCloud](#%E9%85%8D%E7%BD%AELeanCloud)</font>**
 
 <!-- more -->
 
-~~#### 修改`_config.yml`文件~~
+####  ~~修改`_config.yml`文件~~
 
 ~~打开NexT主题的根目录下的`_config.yml`文件，在任意位置添加以下内容：~~
 
@@ -29,7 +33,7 @@ leancloud_visitors:
   app_key: #<AppKEY>
 ```
 
-~~#### 添加`lean-analytics.swig`文件~~
+#### ~~添加`lean-analytics.swig`文件~~
 
 ~~在主题的`layout\_scripts`路径下，新建一个`lean-analytics.swig`文件，并向里面添加以下内容~~
 
@@ -115,12 +119,11 @@ $(function() {
 	} else if ($('.post-title-link').length > 1) {
 		showTime(Counter);
 	}
-}); 
+});
 </script>
-
 ```
 
-~~#### 修改`post.swig`文件~~
+#### ~~修改`post.swig`文件~~
 
 ~~在主题的`layout\_macro`路径下，打开`post.swig`文件，找到以下内容（大概88行）：~~
 
@@ -158,7 +161,7 @@ $(function() {
     {% endif %}
 ```
 
-~~#### 修改`layout.swig`文件~~
+#### ~~修改`layout.swig`文件~~
 
 ~~在NexT根目录的`layout`路径下，打开 `_layout.swig`文件，在`</body>`上方添加如下内容：~~
 ```html
@@ -187,7 +190,7 @@ $(function() {
 </html>
 ```
 
-~~####修改`zh-Hans.yml`文件~~
+#### ~~修改`zh-Hans.yml`文件~~
 
 ~~在NexT目录的`languages`路径下的`zh-Hans.yml`文件，在`post:`结点下添加`visitors: 阅读次数`，像这个样子：~~
 ```html
@@ -211,40 +214,40 @@ post:
 
 
 
-###配置[LeanCloud](https://leancloud.cn)
+### 配置[LeanCloud](https://leancloud.cn)
 
 在注册完成LeanCloud帐号并验证邮箱之后，我们就可以登录我们的LeanCloud帐号，进行一番配置之后拿到`AppID`以及`AppKey`这两个参数即可正常使用文章阅读量统计的功能了。
 
 
-####创建应用
+#### 创建应用
 
- - 我们新建一个应用来专门进行博客的访问统计的数据操作。首先，打开控制台，如下图所示：
+- 我们新建一个应用来专门进行博客的访问统计的数据操作。首先，打开控制台，如下图所示：
 
 
 ![](http://7xkj6q.com1.z0.glb.clouddn.com/static/images/leancloud-page-anlysis/open_consoloe.png "打开控制台")
 
- - 在出现的界面点击`创建应用`：
+- 在出现的界面点击`创建应用`：
 
 
 ![](http://7xkj6q.com1.z0.glb.clouddn.com/static/images/leancloud-page-anlysis/create_app.png "创建应用")
 
- - 在接下来的页面，新建的应用名称我们可以随意输入，即便是输入的不满意我们后续也是可以更改的:
+- 在接下来的页面，新建的应用名称我们可以随意输入，即便是输入的不满意我们后续也是可以更改的:
 
 
 ![](http://7xkj6q.com1.z0.glb.clouddn.com/static/images/leancloud-page-anlysis/creating_app.png "创建的新应用名称")
 
- - 这里为了演示的方便，我新创建一个取名为test的应用。创建完成之后我们点击新创建的应用的名字来进行该应用的参数配置：
+- 这里为了演示的方便，我新创建一个取名为test的应用。创建完成之后我们点击新创建的应用的名字来进行该应用的参数配置：
 
 
 ![](http://7xkj6q.com1.z0.glb.clouddn.com/static/images/leancloud-page-anlysis/create_class.png "打开应用参数配置界面")
 
- - 在应用的数据配置界面，左侧下划线开头的都是系统预定义好的表，为了便于区分我们新建一张表来保存我们的数据。点击左侧右上角的齿轮图标，新建Class：
-在弹出的选项中选择`创建Class`来新建Class用来专门保存我们博客的文章访问量等数据:
-点击`创建Class`之后，~~理论上来说名字可以随意取名，只要你交互代码做相应的更改即可~~，但是为了保证我们前面对NexT主题的修改兼容，此处的**<font color=green>新建Class名字必须为<font color=red >`Counter`**</font></font>:
+- 在应用的数据配置界面，左侧下划线开头的都是系统预定义好的表，为了便于区分我们新建一张表来保存我们的数据。点击左侧右上角的齿轮图标，新建Class：
+   在弹出的选项中选择`创建Class`来新建Class用来专门保存我们博客的文章访问量等数据:
+   点击`创建Class`之后，~~理论上来说名字可以随意取名，只要你交互代码做相应的更改即可~~，但是为了保证我们前面对NexT主题的修改兼容，此处的**<font color=green>新建Class名字必须为<font color=red >`Counter`**</font></font>:
 
 ![](http://7xkj6q.com1.z0.glb.clouddn.com/static/images/leancloud-page-anlysis/creating_class.png "权限配置")
 
- - 由于LeanCloud升级了默认的ACL权限，如果你想避免后续因为权限的问题导致次数统计显示不正常，建议在此处选择`无限制`。
+- 由于LeanCloud升级了默认的ACL权限，如果你想避免后续因为权限的问题导致次数统计显示不正常，建议在此处选择`无限制`。
 
 
 
@@ -277,9 +280,9 @@ leancloud_visitors:
 
 我们可以修改其中的`time`字段的数值来达到修改某一篇文章的访问量的目的（博客文章访问量快递提升人气的装逼利器）。双击具体的数值，修改之后回车即可保存。
 
- -  `url`字段被当作唯一`ID`来使用，因此如果你不知道带来的后果的话请不要修改。
- -  `title`字段显示的是博客文章的标题，用于后台管理的时候区分文章之用，没有什么实际作用。
- -  其他字段皆为自动生成，具体作用请查阅LeanCloud官方文档，如果你不知道有什么作用请不要随意修改。
+-  `url`字段被当作唯一`ID`来使用，因此如果你不知道带来的后果的话请不要修改。
+-  `title`字段显示的是博客文章的标题，用于后台管理的时候区分文章之用，没有什么实际作用。
+-  其他字段皆为自动生成，具体作用请查阅LeanCloud官方文档，如果你不知道有什么作用请不要随意修改。
 
 ###Web安全
 
@@ -305,20 +308,3 @@ leancloud_visitors:
 
 
 Enjoy it！
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
