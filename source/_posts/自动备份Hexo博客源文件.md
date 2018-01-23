@@ -1,7 +1,7 @@
 title: 自动备份Hexo博客源文件
 date: 2015-07-06 12:49:01
 tags:
- - Hexo
+- Hexo
 categories: Hexo
 ---
 
@@ -9,13 +9,13 @@ categories: Hexo
 
 
 
-###前言
+### 前言
 
 &ensp;&ensp;我曾经给出过通过Git备份Hexo博客源文件的方式，这种方式虽然能够备份Hexo博客的源文件，但是对于博主这种懒人，每次更新博文都需要输入两三行重复的Git命令真是一件麻烦的事情。况且指不定哪天就搞忘push到github上了。
 
 <!--more-->
 
-###原理
+### 原理
 
 前两天博主刚刚编写过关于**[Hexo添加文章时自动打开编辑器](https://notes.wanghao.work/2015-06-29-Hexo%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E6%97%B6%E8%87%AA%E5%8A%A8%E6%89%93%E5%BC%80%E7%BC%96%E8%BE%91%E5%99%A8.html)**的相关文章，其原理就是利用`NodeJS`的事件监听机制实现监听Hexo的`new`事件来启动编辑器，完成自动启动编辑器的操作。
 
@@ -34,19 +34,19 @@ categories: Hexo
 
 于是我们就可以通过监听Hexo的`deployAfter`事件，待上传完成之后自动运行Git备份命令，从而达到自动备份的目的。
 
-###实现
+### 实现
 
 
-####将Hexo目录加入Git仓库
+#### 将Hexo目录加入Git仓库
 
 本脚本需要<font color=red>`提前`</font>将Hexo加入Git仓库并与Github或者Gitcafe远程仓库绑定之后，才能正常工作。如果你不知道怎么操作，请参考这篇博文：
 
- - **[备份Hexo博客源文件](https://notes.wanghao.work/2015-04-06-%E5%A4%87%E4%BB%BDHexo%E5%8D%9A%E5%AE%A2%E6%BA%90%E6%96%87%E4%BB%B6.html)**
+- **[备份Hexo博客源文件](https://notes.wanghao.work/2015-04-06-%E5%A4%87%E4%BB%BDHexo%E5%8D%9A%E5%AE%A2%E6%BA%90%E6%96%87%E4%BB%B6.html)**
 
 
 
 
-####安装`shelljs`模块
+#### 安装`shelljs`模块
 
 要实现这个自动备份功能，需要依赖NodeJs的一个`shelljs`模块,该模块重新包装了`child_process`,调用系统命令更加的方便。（其实就是因为博主懒( ╯▽╰)）该模块需要安装后使用。
 
@@ -56,7 +56,7 @@ categories: Hexo
 npm install --save shelljs
 ```
 
-####编写自动备份脚本
+#### 编写自动备份脚本
 
 待到模块安装完成，在`Hexo`根目录的`scripts`文件夹下新建一个js文件，文件名随意取。
 
@@ -102,9 +102,9 @@ function run() {
 }
 ```
 
- - **其中，需要修改第<font color=red>`17`</font>行的<font color=red>`D:/hexo`</font>路径为Hexo的根目录路径。（脚本中的路径为博主的Hexo路径）**
+- **其中，需要修改第<font color=red>`17`</font>行的<font color=red>`D:/hexo`</font>路径为Hexo的根目录路径。（脚本中的路径为博主的Hexo路径）**
 
- - **如果你的Git远程仓库名称不为<font color=red>`origin`</font>的话，还需要修改第<font color=red>`28`</font>行执行的push命令，修改成自己的远程仓库名和相应的分支名。**
+- **如果你的Git远程仓库名称不为<font color=red>`origin`</font>的话，还需要修改第<font color=red>`28`</font>行执行的push命令，修改成自己的远程仓库名和相应的分支名。**
 
 
 

@@ -33,7 +33,7 @@ skip_render:
 
 # Writing
 new_post_name: :title.md # File name of new posts
-default_layout: post
+default_layout: draft
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
@@ -114,20 +114,20 @@ rss:
 creative_commons: by-nc-sa
 #baidushare: true
 
-duoshuo_share: true
-duoshuo_shortname: doublemine
+# duoshuo_share: true
+# duoshuo_shortname: doublemine
 since: 2015
 social:
-  Twitter: https://twitter.com/_xiamo
-  Instagram: https://www.instagram.com/___xiamo/
-  GitHub: https://github.com/doublemine
-  Weibo: http://weibo.com/wanghao19940820
+  Twitter: https://twitter.com/Mokasa__ || twitter
+  Instagram: https://www.instagram.com/___xiamo/ || instagram
+  GitHub: https://github.com/doublemine || github
+  # Weibo: http://weibo.com/wanghao19940820
 
 #以下为友情链接
 links_title: 友情链接
 # links
 links:
-  Kevin: https://jiangtaoquite.github.io/
+  Kevin: https://blog.labradors.work/
   kisence: http://www.kisence.com/
 
 #qiniu:

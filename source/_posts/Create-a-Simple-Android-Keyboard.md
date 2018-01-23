@@ -3,39 +3,39 @@ isupdate: false
 date: 2015-09-04 15:12:11
 updatetime:
 tags: 
- - IME
- - Android
+- IME
+- Android
 categories: Android
 ---
 
-##前言
+## 前言
 
 &emsp;&emsp;由于最近做的一个Android项目需要用到用户的输入一些字符，常规的输入法输入非常的不方便。因此有必要自定义一个输入法来完成这个过程。此处给出一个简单的输入法Demo
 来帮助理解自定义输入法的一些实现过程。
 
- - **有关输入法的一些说明，请参见:[Create a Android IME](http://notes.xiamo.tk/2015-04-01-Create-an-Android-IME.html)**
+- **有关输入法的一些说明，请参见:[Create a Android IME](http://notes.xiamo.tk/2015-04-01-Create-an-Android-IME.html)**
 
 <!--more-->
 
-##准备工作
+## 准备工作
 
 &emsp;&emsp;磨刀不误砍柴工，创建一个Android是需要一点点准备工作的,选择一个好的IDE能够提高我们编码的效率：
- - Android Studio（推荐）
- - Android SDK
+- Android Studio（推荐）
+- Android SDK
 
 本博文的编写环境为Android Studio，如果你还在使用Eclipse的话，转到Android Studio上来吧！如果对上述IDE的下载感到茫然的话，推荐一个国内Android开发的好网站：[http://www.androiddevtools.cn](http://www.androiddevtools.cn/)。
 
-##创建一个Android项目
+## 创建一个Android项目
 
- - 打开Android Studio，创建一个新的Android项目，命名为`SimpleKeyboard`，如下图：
+- 打开Android Studio，创建一个新的Android项目，命名为`SimpleKeyboard`，如下图：
 
 ![](http://i3.piimg.com/37ae2bfdf945c18e.png "创建一个SimpleKeyboard项目")
 
- - 最小的Android支持版本我们在这里选择API 9也就是Android 2.3咯：
+- 最小的Android支持版本我们在这里选择API 9也就是Android 2.3咯：
 
 ![](http://i3.piimg.com/f337c436d68dcc22.png "设置最小SDK支持版本")
 
- - 由于我们只是一个单独的键盘Demo，为了达到极致精简，还是不需要Activity了，因此我们选择`Add No Activity`：
+- 由于我们只是一个单独的键盘Demo，为了达到极致精简，还是不需要Activity了，因此我们选择`Add No Activity`：
 
 ![](http://i3.piimg.com/fed92e215ec17e4f.png "选择Add No Activity")
 
@@ -46,7 +46,7 @@ categories: Android
 ![](http://i3.piimg.com/2195d3987d5dddd1.png)
 
 
-##编辑AndroidManifest.xml文件
+## 编辑AndroidManifest.xml文件
 
 &emsp;&emsp;键盘在Android系统中被识别为一个输入法编辑器（IME），IME作为一个Service运行。只有在AndroidManifest.xml文件中通过`android.permission.BIND_INPUT_METHOD`权限声明的Service并且响应`android.view.im`这个元数据动作才能够被Android系统正确的识别为IME。因此，我们在`AndroidManifest.xml`文件中的application标签对中添加如下代码：
 
@@ -64,7 +64,7 @@ categories: Android
         </service>
 ```
 
-##创建method.xml
+## 创建method.xml
 
 >&emsp;&emsp;在上面的Service声明中，meta-data标签声明引用了一个叫做`method.xml`的文件，如果没有这个文件，那么Android系统将不能够识别我们的Service为一个有效的IME Service。这个文件包含了有关输入法及其子类的详细信息。
 
@@ -82,7 +82,7 @@ categories: Android
 
 如果你对label中直接写死字符串这种做法比较有强迫症的话，可以将其抽取到Strings.xml文件中。
 
-##定义键盘布局
+## 定义键盘布局
 
 &emsp;&emsp;我们的键盘布局比较简单，仅仅包含了一个KeyboardView，因此在`layout`目录中创建一个`keyboard.xml`文件，并添加一下内容：
 
@@ -98,8 +98,8 @@ categories: Android
 ```
 
 其中需要说明的是：
- - `layout_alignParentBottom`属性设置为`true`来保证键盘会在设备屏幕的底端弹出而不是在其它什么地方弹出。
- - `keyPreviewLayout`属性用于按下按键时暂短的按键预览。这里我们由于图方便省事，就用一个TextView来预览吧~
+- `layout_alignParentBottom`属性设置为`true`来保证键盘会在设备屏幕的底端弹出而不是在其它什么地方弹出。
+- `keyPreviewLayout`属性用于按下按键时暂短的按键预览。这里我们由于图方便省事，就用一个TextView来预览吧~
 
 在`layout`目录下创建一个preview.xml文件，并在其中添加如下内容：
 
@@ -116,16 +116,16 @@ categories: Android
 </TextView>
 ```
 
-##定义键盘按键
+## 定义键盘按键
 
 >键盘按键所代表的键值以及其位置等详细信息都被指定在一个xml文件中，每个独立的键盘按键至少都必须包含一下两个属性：
 
 
 
-| 属性名 | 作用 |
-|--------|--------|
-|keyLabel     |    决定这个按键上显示的字符信息    |
-|codes           |  决定这个按键的对应的字符信息所代表的键值|
+| 属性名      | 作用                   |
+| -------- | -------------------- |
+| keyLabel | 决定这个按键上显示的字符信息       |
+| codes    | 决定这个按键的对应的字符信息所代表的键值 |
 
 
 
@@ -138,10 +138,10 @@ categories: Android
 
 
 | 敲击该按键的次数 | 输出的字符 |
-|--------|--------|
-|    1次    |    ?    |
-|2次|!|
-|3次|:|
+| -------- | ----- |
+| 1次       | ?     |
+| 2次       | !     |
+| 3次       | :     |
 
 
 
@@ -149,11 +149,11 @@ categories: Android
 
 
 
-| 属性名 | 作用 |
-|--------|--------|
-|   keyEdgeFlags     |  可以设置的值有：right或者left，该属性通常用在一行最左边或者最右边的按键上用于表示按键的排布      |
-|keyWidth| 定义一个按键的宽度，通常该宽度值被定义为一个百分比值|
-|isRepeatable|如果这个属性被设置为true的话，长按被设置为该属性的按键将会在长按这段时间中多次重复该按键的动作。通过，在删除键或者空格键中设置该属性为true|
+| 属性名          | 作用                                       |
+| ------------ | ---------------------------------------- |
+| keyEdgeFlags | 可以设置的值有：right或者left，该属性通常用在一行最左边或者最右边的按键上用于表示按键的排布 |
+| keyWidth     | 定义一个按键的宽度，通常该宽度值被定义为一个百分比值               |
+| isRepeatable | 如果这个属性被设置为true的话，长按被设置为该属性的按键将会在长按这段时间中多次重复该按键的动作。通过，在删除键或者空格键中设置该属性为true |
 
 
 键盘上的按键通过Row标识为一组按键，比较推荐的做法是限制每组中最多10枚按键，这样的话，每个按键的宽度等于键盘宽度的10%。在本Demo中，按键高度被设置为60dp，这个数值可以任意调整。但是推荐不要低于48dp。
@@ -334,11 +334,11 @@ categories: Android
 </Keyboard>
 ```
 
-##创建Service类
+## 创建Service类
 
 创建一个java类，命名为`SimpleIME.java`（与AndroidManifest.xml文件中的定义向对应）：
- - `SimpleIME`类应该继承至`InputMethodService`类。
- - `SimpleIME`类应该实现`OnKeyboardActionListener`接口，该接口包含了键盘被点击或者被按下时回调的一些函数。
+- `SimpleIME`类应该继承至`InputMethodService`类。
+- `SimpleIME`类应该实现`OnKeyboardActionListener`接口，该接口包含了键盘被点击或者被按下时回调的一些函数。
 
 创建完成之后，将以下内容添加到该文件中：
 
@@ -445,14 +445,14 @@ public class SimpleIME extends InputMethodService implements KeyboardView.OnKeyb
 
 
 
-| 键值 | 指定的动作 |
-|--------|--------|
-|    KEYCODE_DELETE    |   将会使用deleteSurroundingText 方法删除光标左侧的一个字符。     |
-|KEYCODE_DONE|将会激发一个KEYCODE_ENTER 事件。|
-|KEYCODE_SHIFT|caps变量的值将会被改变并且通过setShifted方法更新键盘的状态。整个键盘都会被重新绘制来保证状态改变之后按键的label标签可以被更新。其中：invalidateAllKeys 方法将可以重绘所有按键。|
-|普通键值|将会被简单的转换为一个字符然后发送到文本输入域中，如果caps变量被设置为true，那么按键字符都将被转换为大写。|
+| 键值             | 指定的动作                                    |
+| -------------- | ---------------------------------------- |
+| KEYCODE_DELETE | 将会使用deleteSurroundingText 方法删除光标左侧的一个字符。 |
+| KEYCODE_DONE   | 将会激发一个KEYCODE_ENTER 事件。                  |
+| KEYCODE_SHIFT  | caps变量的值将会被改变并且通过setShifted方法更新键盘的状态。整个键盘都会被重新绘制来保证状态改变之后按键的label标签可以被更新。其中：invalidateAllKeys 方法将可以重绘所有按键。 |
+| 普通键值           | 将会被简单的转换为一个字符然后发送到文本输入域中，如果caps变量被设置为true，那么按键字符都将被转换为大写。 |
 
-##编译运行
+## 编译运行
 
 编译运行，在手机上运行的效果如下图：
 

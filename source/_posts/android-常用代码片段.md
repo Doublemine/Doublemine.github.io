@@ -5,12 +5,12 @@ categories: Android
 ---
 
 
-##前言
+## 前言
 >Android开发过程可能需要用到的代码片段，一共`35`则。供需要时借鉴参考。
-<!--more-->
+><!--more-->
 
 
-###精确获取屏幕尺寸
+### 精确获取屏幕尺寸
 
 >例如：3.5、4.0、5.0寸屏幕：
 
@@ -23,7 +23,7 @@ public static double getScreenPhysicalSize(Activity ctx) {
     }
 ```
 
-###判断设备是否是平板
+### 判断设备是否是平板
 
 >一般是7存以上是平板，此为官方用法。
 
@@ -33,7 +33,7 @@ public static boolean isTablet(Context context) {
     }
 ```
 
-###文字根据状态栏更改颜色
+### 文字根据状态栏更改颜色
 
 >属性为:`android:textColor`
 >此代码文件放置在项目的`res/color/`目录下:
@@ -47,7 +47,7 @@ public static boolean isTablet(Context context) {
 </selector>
 ```
 
-###背景色根据状态更改颜色
+### 背景色根据状态更改颜色
 
 >属性为:`android:backgroup`,如果直接给背景色将会报错:
 
@@ -70,7 +70,7 @@ public static boolean isTablet(Context context) {
 </selector>
 ```
 
-###启动App默认的Activity
+### 启动App默认的Activity
 
 ```java
 public static void startApkActivity(final Context ctx, String packageName) {
@@ -96,7 +96,7 @@ public static void startApkActivity(final Context ctx, String packageName) {
     }
 ```
 
-###计算字宽
+### 计算字宽
 
 >如果设置了`textStyle`，还需要进一步设置`TextPaint`。
 
@@ -108,7 +108,7 @@ public static float GetTextWidth(String text, float Size) {
     }
 ```
 
-###获取应用程序下所有的Activity
+### 获取应用程序下所有的Activity
 
 ```java
 public static ArrayList<String> getActivities(Context ctx) {
@@ -122,7 +122,7 @@ public static ArrayList<String> getActivities(Context ctx) {
   }
 ```
 
-###检测字符串中是否包含汉字
+### 检测字符串中是否包含汉字
 
 ```java
 public static boolean checkChinese(String sequence) {
@@ -135,7 +135,7 @@ public static boolean checkChinese(String sequence) {
     }
 ```
 
-###检测字符串中只能包含:中文、数字、下划线(_)、横线(-)
+### 检测字符串中只能包含:中文、数字、下划线(_)、横线(-)
 
 ```java
 public static boolean checkNickname(String sequence) {
@@ -146,7 +146,7 @@ public static boolean checkNickname(String sequence) {
     } 
 ```
 
-###检查又没有应用程序来接受处理你发出的intent
+### 检查又没有应用程序来接受处理你发出的intent
 
 ```java
 public static boolean isIntentAvailable(Context context, String action) {
@@ -157,7 +157,7 @@ public static boolean isIntentAvailable(Context context, String action) {
     }
 ```
 
-###使用`TransitionDrawable`实现渐变效果
+### 使用`TransitionDrawable`实现渐变效果
 
 >比使用`AlphaAnimation`效果要好，可以避免出现闪烁问题。
 
@@ -172,7 +172,7 @@ private void setImageBitmap(ImageView imageView, Bitmap bitmap) {
     }
 ```
 
-###扫描指定文件
+### 扫描指定文件
 
 >用途:从本软件新增、修改、删除图片、文件某一个文件（音频、视频）徐奥更新系统媒体库时使用。不必扫描整个SD卡。
 
@@ -180,7 +180,7 @@ private void setImageBitmap(ImageView imageView, Bitmap bitmap) {
 sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));
 ```
 
-###Dip转px
+### Dip转px
 
 >用途：难免在Activity代码中设置位置、大小等，本方法就很有用了！ 
 
@@ -190,7 +190,7 @@ public static int dipToPX(final Context ctx, float dip) {
     }
 ```
 
-###获取已经安装的APK路径
+### 获取已经安装的APK路径
 
 >代码:
 
@@ -208,7 +208,7 @@ package: com.tmobile.thememanager, sourceDir: /system/app/ThemeManager.apk
         package: com.touchtype.swiftkey, sourceDir: /data/app/com.touchtype.swiftkey-1.apk
 ```
 
-###多进程`Preferences`数据共享
+### 多进程`Preferences`数据共享
 
 ```java
 public static void putStringProcess(Context ctx, String key, String value) {
@@ -224,7 +224,7 @@ public static void putStringProcess(Context ctx, String key, String value) {
     }
 ```
 
-###泛型`ArrayList`转数组
+### 泛型`ArrayList`转数组
 
 ```java
 @SuppressWarnings("unchecked")
@@ -236,7 +236,7 @@ public static void putStringProcess(Context ctx, String key, String value) {
     }
 ```
 
-###保存回复ListView当前为位置
+### 保存回复ListView当前为位置
 
 >可以保存在`Preference`中或者是数据库中，数据加载完后再设置：
 
@@ -259,7 +259,7 @@ private void saveCurrentPosition() {
     }
 ```
 
-###调用`便携式热点`和`数据共享`设置
+### 调用`便携式热点`和`数据共享`设置
 
 ```java
 public static Intent getHotspotSetting() {
@@ -271,7 +271,7 @@ public static Intent getHotspotSetting() {
     }
 ```
 
-###格式化输出IP地址
+### 格式化输出IP地址
 
 ```java
 public static String getIp(Context ctx) {
@@ -279,7 +279,7 @@ public static String getIp(Context ctx) {
     }
 ```
 
-###文件夹排序
+### 文件夹排序
 
 >先文件夹排序，后文件排序
 
@@ -304,7 +304,7 @@ public static void sortFiles(File[] files) {
     }
 ```
 
-###发送不重复的通知（Notification）
+### 发送不重复的通知（Notification）
 
 >  关键点在这个`requestCode`，这里使用的是当前系统时间，巧妙的保证了每次都是一个新的`Notification`产生。
 
@@ -334,7 +334,7 @@ public static void sendNotification(Context context, String title,
     }
 ```
 
-###代码设置`TextView`的样式
+### 代码设置`TextView`的样式
 
 > 使用过`自定义Dialog`可能马上会想到用如下代码：
 
@@ -347,7 +347,7 @@ public static void sendNotification(Context context, String title,
  new TextView(new ContextThemeWrapper(this, R.style.text_style));
 ```
 
-###ip地址转成8位16进制串
+### ip地址转成8位16进制串
 
 > ip:192.168.68.128 16 =>hex :c0a84480
 
@@ -386,7 +386,7 @@ public static void sendNotification(Context context, String title,
     }
 ```
 
-###`WebView`保留缩放功能但隐藏缩放控件
+### `WebView`保留缩放功能但隐藏缩放控件
 
 >注意：`setDisplayZoomControls`是在API Level 11中新增。
 
@@ -397,7 +397,7 @@ public static void sendNotification(Context context, String title,
               mWebView.getSettings().setDisplayZoomControls(false);
 ```
 
-###获取网络类型名称
+### 获取网络类型名称
 
 ```java
  public static String getNetworkTypeName(Context context) {
@@ -504,7 +504,7 @@ public static void sendNotification(Context context, String title,
     }//end of func
 ```
 
-###从`assets`中读取文本和图片资源
+### 从`assets`中读取文本和图片资源
 
 ```java
  /** 从assets 文件夹中读取文本数据 */
@@ -548,7 +548,7 @@ public static void sendNotification(Context context, String title,
     }
 ```
 
-###展开、收起状态栏
+### 展开、收起状态栏
 
 >用途：可用于点击`Notifacation`之后收起状态栏
 
@@ -586,7 +586,7 @@ public static final void collapseStatusBar(Context ctx) {
     }
 ```
 
-###获取状态栏高度
+### 获取状态栏高度
 
 ```java
 public static int getStatusBarHeight(Context context){
@@ -607,7 +607,7 @@ public static int getStatusBarHeight(Context context){
     }
 ```
 
-###`ListView`使用`ViewHolder`极简写法
+### `ListView`使用`ViewHolder`极简写法
 >用起来非常简练，将ViewHolder隐于无形。
 
 ```java
@@ -639,10 +639,10 @@ public static <T extends View> T getAdapterView(View convertView, int id) {
         ImageView appIconView = getAdapterView(convertView, R.id.app_icon);
 ```
 
-###设置Activity透明
+### 设置Activity透明
 
 > 说明：AppBaseTheme一般是你application指定的android:theme是啥这里就是啥，否则Activity内部的空间风格可能不一致。
->用途：用于模拟Dialog效果，比如再Service中没法用Dialog，就可以用Activity来模拟。
+> 用途：用于模拟Dialog效果，比如再Service中没法用Dialog，就可以用Activity来模拟。
 
 ```xml
     <style name="TransparentActivity" parent="AppBaseTheme">
@@ -654,7 +654,7 @@ public static <T extends View> T getAdapterView(View convertView, int id) {
     </style>
 ```
 
-###代码切换全屏
+### 代码切换全屏
 
 >注意：切换到全屏时，底部的虚拟按键仍然是显示的。次方法可多次调用用于切换.
 >用途：播放器界面经常会用到.
@@ -669,7 +669,7 @@ public static <T extends View> T getAdapterView(View convertView, int id) {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
 ```
 
-###调用开发者选项中显示触摸位置功能
+### 调用开发者选项中显示触摸位置功能
 
 > 设置1显示，设置0不显示。
 
@@ -677,7 +677,7 @@ public static <T extends View> T getAdapterView(View convertView, int id) {
 android.provider.Settings.System.putInt(getContentResolver(), "show_touches", 1);
 ```
 
-###获取设备上已安装并且可启动的应用列表
+### 获取设备上已安装并且可启动的应用列表
 
 >注意：使用`getInstalledApplications`会返回很多无法启动甚至没有图标的系统应用。`ResolveInfo.activityInfo.applicationInfo`也能取到你想要的数据。
 

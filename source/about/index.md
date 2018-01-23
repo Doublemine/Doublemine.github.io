@@ -1,7 +1,5 @@
-title: "about"
-
 date: 2015-04-01 15:54:47
-
+type: "about"
 ---
 
 

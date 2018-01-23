@@ -8,7 +8,7 @@ categories: Android
 
 Android应用在后台运行的时候很容易被强杀，尤其是在国内XX助手、XX管家、XX大师之类的应用大行其道之下。如果我们开发的应用没有被用户加入白名单，很大程度上会被系统因为内存不足或者用户主动给应用在后台运行的时候杀掉。这个时候问题就来了：
 
- - **如何保证我们的应用在被强杀之后用户再次回到应用来保证应用的稳定性而不Crash？**
+- **如何保证我们的应用在被强杀之后用户再次回到应用来保证应用的稳定性而不Crash？**
 
 
 为了说明上述问题，我们来简单模拟这样一个过程:
@@ -76,6 +76,6 @@ ActivityC --> 详情页
 
 
 
-######有关Activity的启动模式相关文章，可参阅[Activity启动模式图文详解](http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0520/2897.html)
+###### 有关Activity的启动模式相关文章，可参阅[Activity启动模式图文详解](http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0520/2897.html)
 
 

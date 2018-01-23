@@ -4,13 +4,13 @@ isupdate: true
 updatetime: 2015-07-19
 categories: Linux
 tags:
- - Debian
- - Linux
- - Exim4
- - 服务器
+- Debian
+- Linux
+- Exim4
+- 服务器
 ---
 
-###前言
+### 前言
 
 >由于博主在[DigitalOcean](https://www.digitalocean.com/?refcode=f07fa4a5aaf1)上购入了一台VPS,并在上面搭建托管了一些服务，不定时的需要登录到服务器上进行管理查看错误日志，比较麻烦。于是打算编写一个`shell`脚本，来监控服务器的一些问题，并在发现问题的时候自动邮件通知到我。
 
@@ -20,15 +20,15 @@ tags:
 >因此，第一步当然得是有一个可用的MTA服务器了。还好Debian默认安装了`Exim4`,可以直接使用。
 
 
-###安装exim4
+### 安装exim4
 
- - 如果你的服务器或者Linux上没有安装`exim4`，请执行以下命令进行安装：
+- 如果你的服务器或者Linux上没有安装`exim4`，请执行以下命令进行安装：
 
 ```bash
 # apt-get install exim4-daemon-light mailutils
 ```
 
-###配置exim4
+### 配置exim4
 
 >配置`exim4`有两种方式:
 
@@ -38,7 +38,7 @@ tags:
 
 在这里我们还是选择比较亲民的图形化界面配置吧。。（博主懒~~）
 
-####图形化界面配置exim4
+#### 图形化界面配置exim4
 
 
 
@@ -48,7 +48,7 @@ tags:
 # dpkg-reconfigure exim4-config
 ```
 
-#####配置邮件系统类型
+##### 配置邮件系统类型
 
 >将会出现一个图形化的配置界面。如下图所示:
 
@@ -56,10 +56,10 @@ tags:
 
 根据自己的需要选择:
 
- - 这里博主考虑到只需要能够发送邮件即可，加上安全性考虑，选择`mail sent by smarthost;no local mail`。
- - 如果你是要搭建邮件服务器，进行接收和发送邮件。请选择`internet site;mail is sent and received directly using SMTP`。
+- 这里博主考虑到只需要能够发送邮件即可，加上安全性考虑，选择`mail sent by smarthost;no local mail`。
+- 如果你是要搭建邮件服务器，进行接收和发送邮件。请选择`internet site;mail is sent and received directly using SMTP`。
 
-#####系统邮件名称
+##### 系统邮件名称
 
 >回车过后，将会来到配置系统邮件名称的界面，如图:
 
@@ -67,7 +67,7 @@ tags:
 
 此处填写你用来发送邮件的邮件域名。例如:你的邮件地址为:<font color=red>`xiamo@gmail.com`</font>,则此处填写为<font color=red>`gmail.com`</font>
 
-#####监听入站STMP连接IP地址
+##### 监听入站STMP连接IP地址
 
 >回车过后，将会配置exim4要监听的入站STMP连接的ip地址，如图:
 
@@ -77,7 +77,7 @@ tags:
 博主填写的为`127.0.0.1`，这表示只监听本地端口，也就是只有本机才能够发邮件，外部不能访问。
 
 
-#####其它可接收邮件的目的地址
+##### 其它可接收邮件的目的地址
 
 >回车过后，将会配置其它可以接收邮件的目的地址，如图：
 
@@ -86,7 +86,7 @@ tags:
 此处直接留空即可。
 
 
-#####配置本地可见域名
+##### 配置本地可见域名
 
 >回车确认之后，将会配置本地用户可见的域名，如图:
 
@@ -96,7 +96,7 @@ tags:
 此处和配置`系统邮件名称`一样，填写发邮件的邮箱域名。例如:`gmail.com`。
 
 
-#####配置发邮件的主机名。
+##### 配置发邮件的主机名。
 
 >回车确认之后，将会配置发邮件使用的smarthost的ip地址或主机名，如图:
 
@@ -104,7 +104,7 @@ tags:
 
 此处填写外部的STMP地址，因为博主使用的gmail，所以填写的是Gmail的STMP地址:`smtp.gmail.com`。
 
-#####配置DNS查询量
+##### 配置DNS查询量
 
 >回车确认之后，将会配置DNS查询量，如图:
 
@@ -112,7 +112,7 @@ tags:
 
 此处选择`NO`，来提高响应速度。如果您的服务器资源宝贵可以使用`Yes`。不过可能会出现一些延迟问题。
 
-#####配置文件拆分
+##### 配置文件拆分
 
 >回车过后，将会询问你是否要将配置文件拆分为小文件，如图:
 
@@ -123,9 +123,9 @@ tags:
 
 >至此，图形化界面就完成配置了。不过呢，现在还不能发送邮件，还需要一些其他的配置。
 
-####修改配置文件
+#### 修改配置文件
 
-#####配置发送邮箱的账号和密码
+##### 配置发送邮箱的账号和密码
 
 现在需要配置发送邮件的邮箱账号和密码，需要编辑`/etc/exim4/passwd.client`这个文件。使用命令:
 
@@ -143,7 +143,7 @@ tags:
 ```
 
 
-#####配置系统邮箱
+##### 配置系统邮箱
 
 现在，我们需要配置系统`mail`命令的默认邮箱，需要编辑`/etc/email-addresses`这个文件。使用命令:
 
@@ -159,7 +159,7 @@ tags:
 
 格式为:<font color-red>`系统用户名: 发件邮箱地址`</font>。注意：冒号`:`后有一个空格。
 
-#####配置exim4，使其支持明文密码
+##### 配置exim4，使其支持明文密码
 
 现在，我们需要对`/etc/exim4/exim4.conf.template`这个文件进行编辑，使用命令:
 
@@ -180,7 +180,7 @@ AUTH_CLIENT_ALLOW_NOTLS_PASSWORDS=1
 ```
 至此，exim4邮件配置就完成了。是不是很简单呢~~
 
-###发送测试邮件
+### 发送测试邮件
 
 配置完成需要发送一封测试邮件看看服务可用不呢~，键入命令:
 
@@ -195,7 +195,7 @@ hello,this is a test email!
 EOT
 ```
 
-###可能出现的错误
+### 可能出现的错误
 
 有的时候可能会遇到exim4抛出的错误，如下:
 ```bash
@@ -203,17 +203,17 @@ debian ALERT: exim paniclog /var/log/exim4/paniclog has non-zero size, mail syst
 ```
 针对这个情况，可以使用以下方法解决:
 
- - 停止`exim4`
+- 停止`exim4`
 
 ```bash
 service exim4 stop
 ```
- - 删除`paniclog`文件
+- 删除`paniclog`文件
 
 ```bash
  rm /var/log/exim4/paniclog
 ```
- - 启动`exim4`
+- 启动`exim4`
 
 ```bash
 service exim4 start
@@ -223,6 +223,6 @@ service exim4 start
 这样，错误问题就完美解决了~
 
 
- 
+
 
 

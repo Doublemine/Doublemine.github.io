@@ -3,9 +3,9 @@ isupdate: false
 date: 2016-10-26 00:19:53
 updatetime:
 tags: 
- - LeanCloud
- - Python
- - Telegram
+- LeanCloud
+- Python
+- Telegram
 categories: Python
 ---
 
@@ -15,8 +15,8 @@ categories: Python
 
 嗯，相关的源码和基本的部署说明丢在Github上了,感兴趣的可以<font color='red'>**[戳此查看](https://github.com/Doublemine/TelegramBot)**</font>。
 
- - [Telegram Bot For DuoShuo](https://github.com/Doublemine/TelegramBot)
+- [Telegram Bot For DuoShuo](https://github.com/Doublemine/TelegramBot)
 
 目前保证基本的功能能够稳定的运行，后续再添加一些其它的功能吧。嗯，详细的配置说明先挖个坑，改天再写。懒癌犯了，先休息~
 
-![](http://7xk0q3.com1.z0.glb.clouddn.com/%E6%97%A0%E5%A5%88%E7%9A%84%E7%8B%97%E7%8B%97.jpg "休息")
+![](https://ws1.sinaimg.cn/large/694830ebgy1fh3r3jys56g208c08cx6p.jpg "休息")

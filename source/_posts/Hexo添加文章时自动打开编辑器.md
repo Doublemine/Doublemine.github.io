@@ -42,9 +42,9 @@ hexo.on('new', function(data){
 
 根据作者给出的示例，一番折腾过后博主终于在自己的机器上实验成功了，下面给出操作步骤：
 
- - 首先在Hexo目录下的`scripts`目录中创建一个JavaScript脚本文件。
- - 如果没有这个`scripts`目录，则新建一个。
- - `scripts`目录新建的JavaScript脚本文件可以任意取名。
+- 首先在Hexo目录下的`scripts`目录中创建一个JavaScript脚本文件。
+- 如果没有这个`scripts`目录，则新建一个。
+- `scripts`目录新建的JavaScript脚本文件可以任意取名。
 
 通过这个脚本，我们用其来监听`hexo new`这个动作，并在检测到`hexo new`之后，执行编辑器打开的命令。
 
@@ -56,14 +56,13 @@ var spawn = require('child_process').exec;
 
 // Hexo 2.x 用户复制这段
 hexo.on('new', function(path){
-  exec('start  "markdown编辑器绝对路径.exe" ' + path);
+  spawn('start  "markdown编辑器绝对路径.exe" ' + path);
 });
 
 // Hexo 3 用户复制这段
 hexo.on('new', function(data){
-  exec('start  "markdown编辑器绝对路径.exe" ' + data.path);
+  spawn('start  "markdown编辑器绝对路径.exe" ' + data.path);
 });
-
 ```
 
 如果你是<font color=red>Mac平台Hexo用户</font>，则将下列内容写入你的脚本：

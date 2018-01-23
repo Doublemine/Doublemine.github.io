@@ -11,7 +11,7 @@ EditPlus是一款博主非常喜欢的文本编辑器，相比notepad++以及Eve
 
 
 
-##简介
+## 简介
 
 以下是来自维基百科简介：
 
@@ -20,12 +20,12 @@ EditPlus是一款博主非常喜欢的文本编辑器，相比notepad++以及Eve
 
 <!--more-->
 
-##下载
+## 下载
 
 下面博主为懒人给出EditPuls下载链接吧：
 
- - [EditPlus官网](https://www.editplus.com/)
- - [EditPlus官方认可的汉化补丁](http://www.cnblogs.com/hanzisearcher/)
+- [EditPlus官网](https://www.editplus.com/)
+- [EditPlus官方认可的汉化补丁](http://www.cnblogs.com/hanzisearcher/)
 
 下载安装之后，首次运行会需要输入激活码，在下面的输入框中输入用户名，点击`生成`生成激活码，将用户名和激活码对应输入注册即可了~
 
@@ -39,5 +39,5 @@ EditPlus是一款博主非常喜欢的文本编辑器，相比notepad++以及Eve
  <input type="text" size="20" readonly="true" name="regcode" id="regcode" placeholder="请粘贴此处的注册码"/></p>
  <input type="submit" value="猛击我生成激活码" onclick="generateEditplusLicence()"/>
  </center>
- 
+
 Enjoy it！
