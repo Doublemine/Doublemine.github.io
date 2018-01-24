@@ -1,0 +1,14 @@
+language: node_js
+node_js: stable
+branches:
+  only:
+    - source
+
+before_install:
+  - git config --global user.name "Doublemine" 
+  - git config --global user.email "doublemine.w@gmail.com"
+
+install:
+  - npm install hexo-cli -g
+  - npm install hexo --save
+  - npm install
