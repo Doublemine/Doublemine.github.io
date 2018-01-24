@@ -2,13 +2,28 @@ language: node_js
 
 node_js: stable
 
+
 branches:
   only:
     - source
 
+
+cache:
+  directories:
+    - node_modules
+
+
 before_install:
-  - git config --global user.name "Doublemine" 
-  - git config --global user.email "doublemine.w@gmail.com"
+  - git config --global user.name "$USERNAME" 
+  - git config --global user.email "$EMAIL"
+  - git submodule init
+  - git submodule update
+
 
 install:
   - npm install
+
+
+script:
+- hexo clean
+- hexo generate
