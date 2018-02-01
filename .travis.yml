@@ -18,10 +18,10 @@ before_install:
   - git config --global user.email "$EMAIL"
   - git submodule init
   - git submodule update
-  - sed "s+#leancloud-app-id+${leancloud-app-id}+g" themes/hexo-theme-next/_config.yml
-  - sed "s+#leancloud-app-key+${leancloud-app-key}+g" themes/hexo-theme-next/_config.yml
-  - sed "s+#livere-uid+${livere-uid}+g" themes/hexo-theme-next/_config.yml
-  - sed "s+#swiftype-key+${swiftype-key}+g" themes/hexo-theme-next/_config.yml
+  - sed -i "s+#leancloud-app-id+${leancloud-app-id}+g" themes/hexo-theme-next/_config.yml
+  - sed -i "s+#leancloud-app-key+${leancloud-app-key}+g" themes/hexo-theme-next/_config.yml
+  - sed -i "s+#livere-uid+${livere-uid}+g" themes/hexo-theme-next/_config.yml
+  - sed -i "s+#swiftype-key+${swiftype-key}+g" themes/hexo-theme-next/_config.yml
 
 
 
@@ -38,5 +38,5 @@ after_script:
   - cd ./public
   - git init .
   - git add .
-  - git commit -am "Travic Automated Update Blog"
+  - git commit -am "travis automated update blog"
   - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
