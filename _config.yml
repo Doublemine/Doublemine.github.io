@@ -88,64 +88,29 @@ deploy:
   type: git
   repo:
     github: git@github.com:Doublemine/Doublemine.github.io.git,master
-    # gitcafe: git@gitcafe.com:smilexiamo/smilexiamo.git,gitcafe-pages
-    #notes: ssh://git@server.wanghao.work:1314/home/nginx-soft/nginx/git_blog_notes.git,master
 
 
 rss:
 
 
-# plugins:
-# - hexo-generator-sitemap
-# - hexo-generator-feed
-# - hexo-generator-baidu-sitemap
-# - hexo-generator-robotstxt
-# - hexo-qiniu-sync
 
 
 
 
-#以下针对HEXO -NEXT主题
-
-#baidu_analytics: 8288c8dbaec733837ad8e70bbe056a1f
 
 
-#tinysou_Key: 7bcfcc04320003ff9fb6
+
+
 creative_commons: by-nc-sa
-#baidushare: true
 
-# duoshuo_share: true
-# duoshuo_shortname: doublemine
 since: 2015
 social:
   Twitter: https://twitter.com/Mokasa__ || twitter
   Instagram: https://www.instagram.com/___xiamo/ || instagram
   GitHub: https://github.com/doublemine || github
-  # Weibo: http://weibo.com/wanghao19940820
 
 #以下为友情链接
 links_title: 友情链接
-# links
 links:
   Kevin: https://blog.labradors.work/
   kisence: http://www.kisence.com/
-
-#qiniu:
-#  offline: false
-#  sync: true
-#  bucket: notes
-#  secret_file: qiniu.json
-#  access_key:
-#  secret_key:
-#  dirPrefix: static
-#  urlPrefix: http://7xkj6q.com1.z0.glb.clouddn.com/static
-#  up_host: http://upload.qiniu.com
-#  local_dir: static
-#  update_exist: true
-#  image:
-#    folder: images
-#    extend:
-#  js:
-#    folder: js
-#  css:
-#    folder: css
