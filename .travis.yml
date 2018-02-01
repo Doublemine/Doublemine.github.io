@@ -18,10 +18,10 @@ before_install:
   - git config --global user.email "$EMAIL"
   - git submodule init
   - git submodule update
-  - sed -i "s+#leancloud-app-id+$leancloud-app-id+g" themes/hexo-theme-next/_config.yml
-  - sed -i "s+#leancloud-app-key+$leancloud-app-key+g" themes/hexo-theme-next/_config.yml
-  - sed -i "s+#livere-uid+$livere-uid+g" themes/hexo-theme-next/_config.yml
-  - sed -i "s+#swiftype-key+$swiftype-key+g" themes/hexo-theme-next/_config.yml
+  - sed -i "s+#leancloud-app-id+$leancloud_app_id+g" themes/hexo-theme-next/_config.yml
+  - sed -i "s+#leancloud-app-key+$leancloud_app_key+g" themes/hexo-theme-next/_config.yml
+  - sed -i "s+#livere-uid+$livere_uid+g" themes/hexo-theme-next/_config.yml
+  - sed -i "s+#swiftype-key+$swiftype_key+g" themes/hexo-theme-next/_config.yml
 
 
 
