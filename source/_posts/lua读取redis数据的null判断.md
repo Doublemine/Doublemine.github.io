@@ -28,7 +28,7 @@ tags:
     end
 
     local obj_token = cjson.decode(access_token)
-    -- to something
+    -- do something
 ```
 
 通过查询资料得知原因：**`lua`读取`redis`数据返回结果为空时，返回的结果不是`nil`而是`userdata`类型的`ngx.null`。**
@@ -53,6 +53,6 @@ tags:
     end
 
     local obj_token = cjson.decode(access_token)
-    -- to something
+    -- do something
 ```
 
