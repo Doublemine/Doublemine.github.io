@@ -59,7 +59,7 @@ gradle build  # 开启gradle构建
 apply plugin: 'maven'
 ```
 
-通过双击`Idea`的Gradle Tasks GUI或者执行命令来完成转换:
+通过双击`Idea`的Gradle Tasks GUI或者执行命令来完成转换:1
 
 ![](https://ws1.sinaimg.cn/large/694830ebgy1fj5phmgqn8j20ok0tan0w.jpg "Idea Gradle Tasks GUI")
 
@@ -89,3 +89,4 @@ install.dependsOn(convert2Maven)
 ```
 
 此时，再执行`gradle install`这个task就可以看到gradle已经自动为我们在项目的根目录下生成好了`pom.xml`文件啦。
+

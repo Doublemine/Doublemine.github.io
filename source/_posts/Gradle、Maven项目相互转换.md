@@ -92,3 +92,6 @@ install.dependsOn(convert2Maven)
 ```
 
 此时，再执行`gradle install`这个task就可以看到gradle已经自动为我们在项目的根目录下生成好了`pom.xml`文件啦。
+
+
+
