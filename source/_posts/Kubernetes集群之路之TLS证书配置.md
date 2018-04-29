@@ -209,7 +209,7 @@ ca.csr  ca-csr.json  ca-key.pem  ca.pem
 
 {%note danger%}
 
-此处需要指定`host`字段的值，该值为所有需要部署etcd节点的`ip 域名 或者 hostname`，etcd需要使用`Subject Alternative Name（SAN）`来校验集群以及防止滥用。
+此处需要指定`host`字段的值，该值为所有需要部署etcd节点的`ip 域名 或者 hostname`，etcd需要使用`Subject Alternative Name（SAN）`来校验集群以及防止滥用。如果你不清楚应该使用哪个ip，默认情况下使用`ip a`查看`eth0`即可。此处指定的`ip`与后续指定的`etcd的systemd`配置`initial-cluster`相关。
 
 相关阅读: [Option to accept TLS client certificates even if they lack correct Subject Alternative Names](https://github.com/coreos/etcd/issues/2056)
 
