@@ -7,17 +7,17 @@ tags:
 
 ---
 
-{%note default%}
+{%note info%}
 
-在前面我们生成了所有kubernetes相关的TLS证书，kubernetes集群自身所有配置相关信息都存储在`etcd`之中，`flannel`为集群中节点的`pod`提供了加入同一局域网的能力。因此接下来我们安装部署`etcd`集群以及`flannel`网络插件。在开始之前请确保在上一篇文章中生成的TLS证书都分发到需要部署的`所有机器节点`的以下位置：
-
-- `/etc/kubernetes/ssl/etcd.pem`
-- `/etc/kubernetes/ssl/etcd-key.pem`
-- `/etc/kubernetes/ssl/ca.pem`
-
-{%endnote%}
+在前面我们生成了所有kubernetes相关的TLS证书，kubernetes集群自身所有配置相关信息都存储在`etcd`之中，`flannel`为集群中节点的`pod`提供了加入同一局域网的能力。因此接下来我们安装部署`etcd`集群以及`flannel`网络插件。{%endnote%}
 
 因为`flannel`插件也依赖于`etcd`存储信息，所以我们首先需要安装`etcd`集群，使之实现高可用。
+
+在开始之前请确保在上一篇文章中生成的TLS证书都分发到需要部署的`所有机器节点`的以下位置：
+
+1. `/etc/kubernetes/ssl/etcd.pem`
+2. `/etc/kubernetes/ssl/etcd-key.pem`
+3. `/etc/kubernetes/ssl/ca.pem`
 
 <!--more-->
 
@@ -157,3 +157,9 @@ cluster is healthy
 ```
 
 至此，我们的`etcd`集群已经顺利安装完成。接下来安装flannel插件。
+
+
+
+#### 参考资料
+
+- [在CentOS上部署kubernetes集群](https://jimmysong.io/kubernetes-handbook/practice/install-kubernetes-on-centos.html)
