@@ -32,9 +32,9 @@ Kubernetes系统的各个组件需要使用`TLS`证书对其通信加密以及�
 
 在开始前，为了模拟集群节点，我们假定需要在以下三台Linux主机上部署Kubernetes:
 
- - `192.168.1.18 `：作为`master&worker`节点
- - `192.168.1.28`：作为`worker`节点
- - `192.168.1.38`：作为`worker`节点
+ - `10.138.148.161 `：作为`master&worker`节点
+ - `10.138.196.180`：作为`worker`节点
+ - `10.138.212.68`：作为`worker`节点
 
 
 ------------------
@@ -182,7 +182,15 @@ ca.csr  ca-csr.json  ca-key.pem  ca.pem
 ```json
 {
   "CN": "etcd",
-  "hosts": [],
+    "hosts": [
+      "127.0.0.1",
+      "10.138.212.68",
+      "10.138.196.180",
+      "10.138.148.161",
+        "master",
+        "node1",
+        "node2"
+    ],
   "key": {
     "algo": "rsa",
     "size": 2048
@@ -201,7 +209,9 @@ ca.csr  ca-csr.json  ca-key.pem  ca.pem
 
 {%note danger%}
 
-此处为了避免配置麻烦，我省略了`hosts`字段的指定，通常情况下，您应该指定该字段值，该值为授权使用该证书的`etcd`节点ip。
+此处需要指定`host`字段的值，该值为所有需要部署etcd节点的`ip 域名 或者 hostname`，etcd需要使用`Subject Alternative Name（SAN）`来校验集群以及防止滥用。
+
+相关阅读: [Option to accept TLS client certificates even if they lack correct Subject Alternative Names](https://github.com/coreos/etcd/issues/2056)
 
 {%endnote%}
 
@@ -224,9 +234,9 @@ etcd.csr  etcd-csr.json  etcd-key.pem etcd.pem
     "CN": "kubernetes",
     "hosts": [
       "127.0.0.1",
-      "192.168.1.18",
-      "192.168.1.28",
-      "192.168.1.38",
+      "10.138.212.68",
+      "10.138.196.180",
+      "10.138.148.161",
       "10.254.0.1",
       "kubernetes",
       "kubernetes.default",
@@ -383,6 +393,8 @@ scheduler.csr  scheduler-key.pem  scheduler.pem
 {%note warning%}
 
 `O`为用户组，kubernetes RBAC定义了ClusterRoleBinding将Group system:nodes和CLusterRole system:node关联起来。
+
+注意:在`kubernetes v1.8+`以上版本，将不会自动创建`binding`,因此我们后续需要手动创建绑定关系。
 
 {%endnote%}
 
