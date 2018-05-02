@@ -7,6 +7,8 @@ tags:
 
 ---
 
+![](https://cdn.worldvectorlogo.com/logos/etcd.svg)
+
 {%note info%}
 
 在前面我们生成了所有kubernetes相关的TLS证书，kubernetes集群自身所有配置相关信息都存储在`etcd`之中，`flannel`为集群中节点的`pod`提供了加入同一局域网的能力。因此接下来我们安装部署`etcd`集群以及`flannel`网络插件。{%endnote%}
@@ -156,6 +158,14 @@ member f43a05b0ce1a8ed6 is healthy: got healthy result from https://xxx.xxx.xxx.
 cluster is healthy
 ```
 
+------
+
+#### 后记
+
+需要特别说明的是：`etcd`集群是否和`kubernetes`部署在同样的服务器上是`可选的`。也就是说`etcd`集群可以脱离`kubernetes`部署的集群而单独部署在其他单独的服务器上，且并不需要和`kubernetes`节点数对应。
+
+------
+
 至此，我们的`etcd`集群已经顺利安装完成。接下来安装flannel插件。
 
 
@@ -163,3 +173,4 @@ cluster is healthy
 #### 参考资料
 
 - [在CentOS上部署kubernetes集群](https://jimmysong.io/kubernetes-handbook/practice/install-kubernetes-on-centos.html)
+
