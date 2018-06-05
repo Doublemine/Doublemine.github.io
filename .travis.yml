@@ -22,6 +22,10 @@ before_install:
   - sed -i "s+#leancloud-app-key+$leancloud_app_key+g" themes/hexo-theme-next/_config.yml
   - sed -i "s+#livere-uid+$livere_uid+g" themes/hexo-theme-next/_config.yml
   - sed -i "s+#swiftype-key+$swiftype_key+g" themes/hexo-theme-next/_config.yml
+  - git clone https://github.com/theme-next/theme-next-bookmark.git themes/hexo-theme-next/source/lib/bookmark
+  - git clone https://github.com/theme-next/theme-next-reading-progress themes/hexo-theme-next/source/lib/reading_progress
+  - git clone https://github.com/theme-next/theme-next-canvas-nest themes/hexo-theme-next/source/lib/canvas-nest
+  - git clone https://github.com/theme-next/theme-next-han themes/hexo-theme-next/source/lib/Han
 
 
 
