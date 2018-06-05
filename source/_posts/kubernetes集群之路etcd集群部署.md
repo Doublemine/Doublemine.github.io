@@ -11,9 +11,9 @@ tags:
 
 {%note info%}
 
-在前面我们生成了所有kubernetes相关的TLS证书，kubernetes集群自身所有配置相关信息都存储在`etcd`之中，`flannel`为集群中节点的`pod`提供了加入同一局域网的能力。因此接下来我们安装部署`etcd`集群以及`flannel`网络插件。{%endnote%}
+在前面我们生成了所有kubernetes相关的TLS证书，kubernetes集群自身所有配置相关信息都存储在etcd之中，flannel为集群中节点的pod提供了加入同一局域网的能力。因此接下来我们安装部署etcd集群以及flannel网络插件。{%endnote%}
 
-因为`flannel`插件也依赖于`etcd`存储信息，所以我们首先需要安装`etcd`集群，使之实现高可用。
+因为flannel插件也依赖于etcd存储信息，所以我们首先需要安装etcd集群，使之实现高可用。
 
 在开始之前请确保在上一篇文章中生成的TLS证书都分发到需要部署的`所有机器节点`的以下位置：
 
@@ -23,9 +23,9 @@ tags:
 
 <!--more-->
 
-#### 部署`etcd`
+#### 部署etcd
 
-我们采用纯二进制安装`etcd`,因此不使用默认的包管理器中的安装文件。在每台需要部署的`etcd`的节点上，下载最新版本的`etcd`二进制安装包：
+我们采用纯二进制安装etcd,因此不使用默认的包管理器中的安装文件。在每台需要部署的etcd的节点上，通过官方仓库下载你需要的版本的etcd二进制安装包：
 
 - [https://github.com/coreos/etcd/releases](https://github.com/coreos/etcd/releases)
 
@@ -33,22 +33,22 @@ tags:
 
 ##### 下载安装二进制文件
 
-目前最新版本是[v3.3.4](https://github.com/coreos/etcd/releases/tag/v3.3.4)，找到对应的系统架构并直接下载:  [https://github.com/coreos/etcd/releases/download/v3.3.4/etcd-v3.3.4-linux-amd64.tar.gz](https://github.com/coreos/etcd/releases/download/v3.3.4/etcd-v3.3.4-linux-amd64.tar.gz)
+目前最新版本是[v3.3.4](https://github.com/coreos/etcd/releases/tag/v3.3.4)（截止到我写这篇文章的时候），而kubernetes v1.10验证过的版本为[`3.1.12`](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.10.md#external-dependencies),如果没有特殊需求请尽量使用验证版本（如果你是不升级不舒服斯基当我没说）找到对应的系统架构并直接下载:  [https://github.com/coreos/etcd/releases/download/v3.1.12/etcd-v3.1.12-linux-amd64.tar.gz](https://github.com/coreos/etcd/releases/download/v3.1.12/etcd-v3.1.12-linux-amd64.tar.gz)
 
-在所有需要安装etcd节点执行以下命令来安装`etcd和etcdctl`(注意，截止到目前最新版本是v3.3.4，根据你的需要自行替换对应架构和版本):
+在所有需要安装etcd节点执行以下命令来安装`etcd和etcdctl`(注意:etcd目前不支持降级，如果你初始安装版本过高，后续像降级到验证版是比较麻烦的):
 
 ```bash
-wget https://github.com/coreos/etcd/releases/download/v3.3.4/etcd-v3.3.4-linux-amd64.tar.gz
-tar zxvf etcd-v3.3.4-linux-amd64.tar.gz
-cd etcd-v3.3.4-linux-amd64
+wget https://github.com/coreos/etcd/releases/download/v3.1.12/etcd-v3.1.12-linux-amd64.tar.gz
+tar zxvf etcd-v3.1.12-linux-amd64.tar.gz
+cd etcd-v3.1.12-linux-amd64
 sudo mv etcd etcdctl /usr/local/bin/
 ```
 
 
 
-##### 配置systemd
+##### 配置systemd unit
 
-接着，我们需要编辑对应的systemd service文件，我们需要新建一个`etcd.service`文件并放置于以下路径：`/usr/lib/systemd/system/etcd.service`并键入以下内容：
+接着，我们需要编辑对应的systemd unit service文件，我们需要新建一个`etcd.service`文件并放置于以下路径：`/usr/lib/systemd/system/etcd.service`并键入以下内容：
 
 ```properties
 [Unit]
@@ -162,7 +162,10 @@ cluster is healthy
 
 #### 后记
 
-需要特别说明的是：`etcd`集群是否和`kubernetes`部署在同样的服务器上是`可选的`。也就是说`etcd`集群可以脱离`kubernetes`部署的集群而单独部署在其他单独的服务器上，且并不需要和`kubernetes`节点数对应。
+需要特别说明的是：`etcd`集群是否和`kubernetes`部署在同样的服务器节点上是`可选的`。也就是说`etcd`集群可以脱离`kubernetes`部署的集群而单独部署在其他单独的服务器上，且并不需要和`kubernetes`节点数对应。经过我的实践如果有条件的话请务必：
+
+- 将etcd部署在kubernetes的Node节点之外负载比较低的服务器节点上。
+- etcd的集群数量尽量为奇数，以确保某些情况下部分etcd节点挂掉的选举问题。
 
 ------
 
