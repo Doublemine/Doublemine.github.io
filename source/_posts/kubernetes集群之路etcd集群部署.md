@@ -11,7 +11,7 @@ tags:
 
 {%note info%}
 
-在前面我们生成了所有kubernetes相关的TLS证书，kubernetes集群自身所有配置相关信息都存储在etcd之中，flannel为集群中节点的pod提供了加入同一局域网的能力。因此接下来我们安装部署etcd集群以及flannel网络插件。{%endnote%}
+在前面我们生成了所有kubernetes相关的TLS证书，kubernetes集群自身所有配置相关信息都存储在etcd之中，而flannel也将网络子网网段注册到etcd之中并为集群中节点的pod提供了加入同一局域网的能力。因此接下来我们安装部署etcd集群。{%endnote%}
 
 因为flannel插件也依赖于etcd存储信息，所以我们首先需要安装etcd集群，使之实现高可用。
 
@@ -90,10 +90,11 @@ WantedBy=multi-user.target
 
 {%note warning%}
 
-1. `WorkingDirectory`:指定 `etcd` 的工作目录和数据目录为 `/var/lib/etcd`，需在启动服务前创建这个目录。
+1. `WorkingDirectory`:指定 etcd 的工作目录和数据目录为 `/var/lib/etcd`，需在启动服务前创建这个目录。
 2. 为了保证通信安全，需要指定 etcd 的公私钥(cert-file和key-file)、Peers 通信的公私钥和CA证书(peer-cert-file、peer-key-file、peer-trusted-ca-file)、客户端的CA证书（trusted-ca-file）。
 3. `--initial-cluster-state` 值为 `new` 时，`--name` 的参数值必须位于 `--initial-cluster` 列表中。
-4. 我们将其中一些参数的设置抽取为环境变量，以便于我们修改参数的时候不需要再次`systemctl daemon-reload`。
+4. 我们将其中一些参数的设置抽取为环境变量，以便于我们修改参数的时候不需要再次systemctl daemon-reload。
+5. 带有`--peer-xxx`前缀的配置为etcd与其它etcd节点通信的相关配置，不带有的该前缀的则为客户端（例如：etcdctl）与etcd节点（作为服务器）通信的相关配置。
 
 {%endnote%}
 
@@ -122,9 +123,9 @@ ETCD_CLUSTER_NODE_LIST="node1=https://10.138.148.161:2380,node2=https://10.138.1
 
 {%note warning%}
 
-1. 这是节点`10.138.148.161`的环境变量配置文件内容，对于其他节点，修改对应的`ETCD_NAME`为对应的`node1、node2、node3`，并将`ETCD_INITIAL_ADVERTISE_PEER_URLS`和`ETCD_INITIAL_ADVERTISE_PEER_URLS`修改为对应的节点的`ip`。
-2. 此处需要特别说明的是：`ETCD_CLUSTER_NODE_LIST`中的`ip`必须在生成etcd TLS证书时在`etcd-csr.json`中的`hosts`字段中指定（`Subject Alternative Name（SAN）`），否则可能会得到`(error "remote error: tls: bad certificate", ServerName "")`这样的错误。
-3. 所有需要加入的节点都需要在`ETCD_CLUSTER_NODE_LIST`中指定，并正确配置起`ETCD_NAME`。
+1. 这是节点IP为10.138.148.161的环境变量配置文件内容，对于其他节点，修改对应的`ETCD_NAME`为对应的node1、node2、node3，并将`ETCD_INITIAL_ADVERTISE_PEER_URLS`和`ETCD_INITIAL_ADVERTISE_PEER_URLS`修改为对应的节点的`ip`。
+2. 此处需要特别说明的是：`ETCD_CLUSTER_NODE_LIST`中的ip必须在生成etcd TLS证书时在`etcd-csr.json`中的`hosts`字段中指定（Subject Alternative Name（SAN）），否则可能会得到`(error "remote error: tls: bad certificate", ServerName "")`这样的错误。
+3. 所有需要加入的节点都需要在`ETCD_CLUSTER_NODE_LIST`中指定，并正确配置其`ETCD_NAME`。
 
 {%endnote%}
 
@@ -132,7 +133,7 @@ ETCD_CLUSTER_NODE_LIST="node1=https://10.138.148.161:2380,node2=https://10.138.1
 
 ##### 验证etcd安装
 
-在所有的节点上完成了上述两步之后，我们分别执行以下命令来启动etcd:
+在所有的节点上完成了上述两步之后，我们分别执行以下命令来启动etcd（初始可能会阻塞一段时间）:
 
 ```bash
 sudo systemctl daemon-reload
