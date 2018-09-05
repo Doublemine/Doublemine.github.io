@@ -20,7 +20,8 @@ before_install:
   - git submodule update
   - sed -i "s+#leancloud-app-id+$leancloud_app_id+g" themes/hexo-theme-next/_config.yml
   - sed -i "s+#leancloud-app-key+$leancloud_app_key+g" themes/hexo-theme-next/_config.yml
-  - sed -i "s+#livere-uid+$livere_uid+g" themes/hexo-theme-next/_config.yml
+  - sed -i "s+#leancloud-comment-id+$leancloud_comment_id+g" themes/hexo-theme-next/_config.yml
+  - sed -i "s+#leancloud-comment-key+$leancloud_comment_key+g" themes/hexo-theme-next/_config.yml
   - sed -i "s+#swiftype-key+$swiftype_key+g" themes/hexo-theme-next/_config.yml
   - git clone https://github.com/theme-next/theme-next-bookmark.git themes/hexo-theme-next/source/lib/bookmark
   - git clone https://github.com/theme-next/theme-next-reading-progress themes/hexo-theme-next/source/lib/reading_progress
