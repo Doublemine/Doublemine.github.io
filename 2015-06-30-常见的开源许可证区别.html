@@ -1,0 +1,1355 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.cat.net/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.3.0',
+    sidebar: {"position":"right","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="如何为代码选择开源许可证，这是一个问题。 世界上的开源许可证，大概有上百种。很少有人搞得清楚它们的区别。千言万语，比不上一张图：">
+<meta name="keywords" content="笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见的开源许可证">
+<meta property="og:url" content="https://notes.wanghao.work/2015-06-30-常见的开源许可证区别.html">
+<meta property="og:site_name" content="Doublemine">
+<meta property="og:description" content="如何为代码选择开源许可证，这是一个问题。 世界上的开源许可证，大概有上百种。很少有人搞得清楚它们的区别。千言万语，比不上一张图：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://7xkj6q.com1.z0.glb.clouddn.com/blog/image/jpg/1135650364a1ffda02o.jpg">
+<meta property="og:image" content="http://7xkj6q.com1.z0.glb.clouddn.com/blog/image/jpg/11356503627da387f0o.jpg">
+<meta property="og:updated_time" content="2019-07-03T03:40:55.496Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常见的开源许可证">
+<meta name="twitter:description" content="如何为代码选择开源许可证，这是一个问题。 世界上的开源许可证，大概有上百种。很少有人搞得清楚它们的区别。千言万语，比不上一张图：">
+<meta name="twitter:image" content="http://7xkj6q.com1.z0.glb.clouddn.com/blog/image/jpg/1135650364a1ffda02o.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Doublemine" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://notes.wanghao.work/2015-06-30-常见的开源许可证区别.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>常见的开源许可证 | Doublemine</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Doublemine</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://notes.wanghao.work/2015-06-30-常见的开源许可证区别.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="夏末">
+      <meta itemprop="description" content="Keep fucking the world">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Doublemine">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">常见的开源许可证
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2015-06-30 15:18:41" itemprop="dateCreated datePublished" datetime="2015-06-30T15:18:41+00:00">2015-06-30</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-03 03:40:55" itemprop="dateModified" datetime="2019-07-03T03:40:55+00:00">2019-07-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015-06-30-常见的开源许可证区别.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2015-06-30-常见的开源许可证区别.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2015-06-30-常见的开源许可证区别.html" class="leancloud_visitors" data-flag-title="常见的开源许可证">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>如何为代码选择开源许可证，这是一个问题。</p>
+<p>世界上的开源许可证，大概有上百种。很少有人搞得清楚它们的区别。千言万语，比不上一张图：</p>
+<p><img src="http://7xkj6q.com1.z0.glb.clouddn.com/blog/image/jpg/1135650364a1ffda02o.jpg" class="full-image"></p>
+<a id="more"></a>
+<p>以下是常见的六种开源协议：</p>
+<ul>
+<li><h2 id="GPL-License"><a href="#GPL-License" class="headerlink" title="GPL License"></a><a href="http://www.gnu.org/licenses/gpl.html" target="_blank" rel="noopener">GPL License</a></h2></li>
+</ul>
+<blockquote>
+<p>GPL协议的主要内容是只要在一个软件中使用(“使用”指类库引用，修改后的代码或者衍生代码)GPL 协议的产品，则该软件产品必须也采用GPL协议，既必须也是开源和免费。这就是所谓的”传染性”。GPL协议的产品作为一个单独的产品使用没有任何问题，还可以享受免费的优势。</p>
+</blockquote>
+<blockquote>
+<p><strong>由于GPL严格要求使用了GPL类库的软件产品必须使用GPL协议，对于使用GPL协议的开源代码，商业软件或者对代码有保密要求的部门就不适合集成/采用作为类库和二次开发的基础。</strong></p>
+</blockquote>
+<ul>
+<li><h2 id="BSD-License"><a href="#BSD-License" class="headerlink" title="BSD License"></a><a href="https://en.wikipedia.org/wiki/BSD_licenses" target="_blank" rel="noopener">BSD License</a></h2></li>
+</ul>
+<blockquote>
+<p>BSD开源协议是一个给于使用者很大自由的协议。基本上使用者可以”为所欲为”,可以自由的使用，修改源代码，也可以将修改后的代码作为开源或者专有软件再发布。</p>
+</blockquote>
+<blockquote>
+<p>但”为所欲为”的前提当你发布使用了BSD协议的代码，或则以BSD协议代码为基础做二次开发自己的产品时，需要满足三个条件：</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>如果再发布的产品中包含源代码，则在源代码中必须带有原来代码中的BSD协议。</li>
+<li>如果再发布的只是二进制类库/软件，则需要在类库/软件的文档和版权声明中包含原来代码中的BSD协议。</li>
+<li>不可以用开源代码的作者/机构名字和原来产品的名字做市场推广。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>BSD 代码鼓励代码共享，但需要尊重代码作者的著作权。BSD由于允许使用者修改和重新发布代码，也允许使用或在BSD代码上开发商业软件发布和销售，因此是对商业集成很友好的协议。而很多的公司企业在选用开源产品的时候都首选BSD协议，因为可以完全控制这些第三方的代码，在必要的时候可以修改或者二次开发。</strong></p>
+</blockquote>
+<ul>
+<li><h2 id="MIT-License"><a href="#MIT-License" class="headerlink" title="MIT License"></a><a href="https://en.wikipedia.org/wiki/MIT_License" target="_blank" rel="noopener">MIT License</a></h2></li>
+</ul>
+<blockquote>
+<p>在所有常用的开源许可证中，MIT许可证最为简短，可能也最为广泛。它的条款非常松散，比起大部分其它许可证来说更加宽松。它的基本前提如下：</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>该许可免费授予任何获得本软件及相关文档（合称为“软件包”）的人，许可其无限制地应用软件，包括不受限地使用、拷贝、修改、合并、出版、分发、再授权、和/或出售软件的拷贝。被许可者获取软件包提供的权利须基于以下条件：</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>以上版权声明和本许可声明必须包含在软件包的全部拷贝或实质性部分中。</strong></p>
+</blockquote>
+<blockquote>
+<ul>
+<li>你可以任意使用、拷贝和修改软件。没人能够限制你将软件用于任何项目、以你喜欢的格式拷贝软件任意多次、或以任何方式收费。</li>
+<li>你可以免费分发软件或者出售软件，你分发软件的方式不受限制。</li>
+<li>唯一的限制是软件必须附带许可协议。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>MIT许可证是限制最少的许可证，它基本上是说，只要附带许可证，任何人都可以利用该许可证授权的软件做任何想做的事。</p>
+</blockquote>
+<ul>
+<li><h2 id="Creative-Commons"><a href="#Creative-Commons" class="headerlink" title="Creative Commons"></a><a href="http://creativecommons.org/" target="_blank" rel="noopener">Creative Commons</a></h2></li>
+</ul>
+<blockquote>
+<p>知识共享（Creative Commons，简称CC）许可证并非完全的开源许可证，但设计类项目也常常使用。有各种不同的CC许可证可供使用，每种授予特定的权利。一个CC许可证包含四个基本部分，每部分即可单独生效，又可联合使用。简述如下：</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>署名</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><em>必须按照作者指定的方式对作品进行署名。除此之外，作品可被复制、分发、拷贝以及以其它方式使用</em></p>
+</blockquote>
+<blockquote>
+<ul>
+<li>相同方式共享</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>只能基于相同的CC许可证对作品进行修改、分发等。*</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>非商业性</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><em>作品可被修改、分发等，但不得以商业为目的进行。关于什么构成商业行为，许可证条款并未提供清晰的定义，因此你可能需要在自己的项目里给予澄清。比如说，有人认为“非商业”只是简单地意味着你不能出售作品，也有人认为你不能把作品放到一个带广告的网站上，还有人认为只有当牟利发生时才能称为“商业”。</em></p>
+</blockquote>
+<blockquote>
+<ul>
+<li>禁止衍生</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><em>你可以拷贝和分发授权作品，但你不得以任何方式修改、或基于原作进行创作。</em></p>
+</blockquote>
+<blockquote>
+<p><strong>如前所述，CC许可证的各个部分可以联合使用。最为严格的许可证为“署名-非商业-禁止衍生”许可证，即你可以自由分享作品，但不得修改或收费，同时你必须按照作者指定的方式为作品署名。这对那些一方面希望发布作品，另一方面又希望多多少少保留对作品使用方式的控制权的作者来说，颇为不错。限制最少的CC许可证是“署名”许可证，即只要按照作者指定的方式为作品署名，就可以用作品做任何事。</strong></p>
+</blockquote>
+<ul>
+<li><h2 id="Apache-License"><a href="#Apache-License" class="headerlink" title="Apache License"></a><a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank" rel="noopener">Apache License</a></h2></li>
+</ul>
+<blockquote>
+<p>Apache许可证（2.0版）授予用户大量权利，这些权利适用于版权和专利权。由于有的许可证只适用于版权、不适用于专利权，Apache许可证的这一灵活性使其成为专利开发者的首选。</p>
+</blockquote>
+<blockquote>
+<p>Apache许可证特点：</p>
+<ul>
+<li>权利的永久性</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><em>一旦许可证被授予，你就可以无限期使用。</em></p>
+</blockquote>
+<blockquote>
+<ul>
+<li>权利的世界性</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><em>如果许可证在某一国授予，那么它同时也授予给其它所有国家。例如，如果你在美国，而原始许可证在印度颁发，那么，你在许可证授权下使用代码并无限制。</em></p>
+</blockquote>
+<blockquote>
+<ul>
+<li>获取权利的免费性</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><em>你不用预先支付任何使用费，也不用为每次使用或基于其它方式而付费。</em></p>
+</blockquote>
+<blockquote>
+<ul>
+<li>权利的非排他性</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><em>你能使用经授权的软件，任何其他人也能使用。</em></p>
+</blockquote>
+<blockquote>
+<ul>
+<li>权利的不可撤回性</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><em>权利一旦授予，无人能撤回。换句话说，你无需担心将来的某个时候，当你创造出授权代码的优秀衍生产品时，有人会跳出来说：“抱歉，你再也不能使用这些代码了” （许可证有条款指出，如果你就许可证授权下的任何内容起诉他人，你的许可证授权即告终结。但这仅仅适用于有专利的软件，并且只要你不起诉软件相关的任何人，你就不必担心）.</em></p>
+</blockquote>
+<blockquote>
+<p><strong>Apache许可证对分发代码也有特殊要求，主要是有关给予代码作者以适当荣誉，以及保持许可证的一致性。</strong></p>
+</blockquote>
+<ul>
+<li><h2 id="LGPL-License"><a href="#LGPL-License" class="headerlink" title="LGPL License"></a><a href="http://www.gnu.org/copyleft/lesser.html" target="_blank" rel="noopener">LGPL License</a></h2></li>
+</ul>
+<blockquote>
+<p>LGPL允许商业软件通过类库引用(link)方式使用LGPL类库而不需要开源商业软件的代码。这使得采用LGPL协议的开源代码可以被商业软件作为类库引用并发布和销售。</p>
+</blockquote>
+<blockquote>
+<p>但是如果修改LGPL协议的代码或者衍生，则所有修改的代码，涉及修改部分的额外代码和衍生的代码都必须采用LGPL协议。因此LGPL协议的开源代码很适合作为第三方类库被商业软件引用，但不适合希望以LGPL协议代码为基础，通过修改和衍生的方式做二次开发的商业软件采用。</p>
+</blockquote>
+<blockquote>
+<p><strong>GPL/LGPL都保障原作者的知识产权，避免有人利用开源代码复制并开发类似的产品</strong></p>
+</blockquote>
+<p>不难看出，即便是在这六种许可协议中作出选择，也是比较困难的。</p>
+<p><a href="http://paulmillr.com/posts/simple-description-of-popular-software-licenses/" target="_blank" rel="noopener">乌克兰程序员Paul Bagwell</a>，画了一张分析图，说明应该怎么选择。这是我见过的最简单的讲解，只用两分钟，你就能搞清楚这六种许可证之间的最大区别。</p>
+<p>以下为汉化版本，感谢<a href="http://blog.csdn.net/wadefelix/article/details/6384317" target="_blank" rel="noopener">wadefelix</a>的制作：</p>
+<p><img src="http://7xkj6q.com1.z0.glb.clouddn.com/blog/image/jpg/11356503627da387f0o.jpg" class="full-image"></p>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>夏末</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://notes.wanghao.work/2015-06-30-常见的开源许可证区别.html" title="常见的开源许可证">https://notes.wanghao.work/2015-06-30-常见的开源许可证区别.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015-06-29-Git常用命令.html" rel="next" title="Git常用命令">
+                <i class="fa fa-chevron-left"></i> Git常用命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015-07-02-EditPlus-Licenses在线生成器.html" rel="prev" title="EditPlus Licenses在线生成器">
+                EditPlus Licenses在线生成器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="夏末">
+            
+              <p class="site-author-name" itemprop="name">夏末</p>
+              <p class="site-description motion-element" itemprop="description">Keep fucking the world</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/Mokasa__" target="_blank" title="Twitter" rel="external nofollow"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.instagram.com/___xiamo/" target="_blank" title="Instagram" rel="external nofollow"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/doublemine" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank" rel="external nofollow">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.labradors.work/" title="Kevin" target="_blank">Kevin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.kisence.com/" title="kisence" target="_blank">kisence</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#GPL-License"><span class="nav-number">1.</span> <span class="nav-text">GPL License</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BSD-License"><span class="nav-number">2.</span> <span class="nav-text">BSD License</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MIT-License"><span class="nav-number">3.</span> <span class="nav-text">MIT License</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Creative-Commons"><span class="nav-number">4.</span> <span class="nav-text">Creative Commons</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Apache-License"><span class="nav-number">5.</span> <span class="nav-text">Apache License</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LGPL-License"><span class="nav-number">6.</span> <span class="nav-text">LGPL License</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夏末</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" rel="external nofollow" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'jNtrKbh7n1iCujKSNNQ2AlH3',
+        appKey: 'l5SnKfDysKAOoMwfpVAFUDTR',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("jNtrKbh7n1iCujKSNNQ2AlH3", "l5SnKfDysKAOoMwfpVAFUDTR");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.3.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.3.0"></script>
+
+
+  
+
+  
+  
+  
+  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
+  <script type="text/javascript">
+  
+    bookmark.scrollToMark('auto', "#更多");
+  
+  </script>
+
+
+  
+
+</body>
+</html>

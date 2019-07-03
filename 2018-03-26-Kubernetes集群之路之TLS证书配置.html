@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.cat.net/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.3.0',
+    sidebar: {"position":"right","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Kubernetes是Google开源的容器化集群管理系统，其提供的应用部署、扩展、服务发现等机制对于微服务化架构应用有着十分重要的作用。 本系列文章基于以下版本来讲述如何使用二进制方式安装Kubernetes集群顺便讲述下踩坑的心路历程：  Kubernetes version: v1.10 System: CentOS Linux 7 Kernel: Linux 3.10.0  Kubern">
+<meta name="keywords" content="docker,kubernetes">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kubernetes集群之路（一）TLS证书配置">
+<meta property="og:url" content="https://notes.wanghao.work/2018-03-26-Kubernetes集群之路之TLS证书配置.html">
+<meta property="og:site_name" content="Doublemine">
+<meta property="og:description" content="Kubernetes是Google开源的容器化集群管理系统，其提供的应用部署、扩展、服务发现等机制对于微服务化架构应用有着十分重要的作用。 本系列文章基于以下版本来讲述如何使用二进制方式安装Kubernetes集群顺便讲述下踩坑的心路历程：  Kubernetes version: v1.10 System: CentOS Linux 7 Kernel: Linux 3.10.0  Kubern">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/6/67/Kubernetes_logo.svg">
+<meta property="og:updated_time" content="2019-07-03T03:40:55.496Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kubernetes集群之路（一）TLS证书配置">
+<meta name="twitter:description" content="Kubernetes是Google开源的容器化集群管理系统，其提供的应用部署、扩展、服务发现等机制对于微服务化架构应用有着十分重要的作用。 本系列文章基于以下版本来讲述如何使用二进制方式安装Kubernetes集群顺便讲述下踩坑的心路历程：  Kubernetes version: v1.10 System: CentOS Linux 7 Kernel: Linux 3.10.0  Kubern">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/6/67/Kubernetes_logo.svg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Doublemine" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://notes.wanghao.work/2018-03-26-Kubernetes集群之路之TLS证书配置.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Kubernetes集群之路（一）TLS证书配置 | Doublemine</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Doublemine</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://notes.wanghao.work/2018-03-26-Kubernetes集群之路之TLS证书配置.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="夏末">
+      <meta itemprop="description" content="Keep fucking the world">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Doublemine">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Kubernetes集群之路（一）TLS证书配置
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-03-26 12:40:08" itemprop="dateCreated datePublished" datetime="2018-03-26T12:40:08+00:00">2018-03-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-03 03:40:55" itemprop="dateModified" datetime="2019-07-03T03:40:55+00:00">2019-07-03</time>
+              
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018-03-26-Kubernetes集群之路之TLS证书配置.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2018-03-26-Kubernetes集群之路之TLS证书配置.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018-03-26-Kubernetes集群之路之TLS证书配置.html" class="leancloud_visitors" data-flag-title="Kubernetes集群之路（一）TLS证书配置">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="https://upload.wikimedia.org/wikipedia/commons/6/67/Kubernetes_logo.svg" alt></p>
+<div class="note default"><p>Kubernetes是Google开源的容器化集群管理系统，其提供的应用部署、扩展、服务发现等机制对于微服务化架构应用有着十分重要的作用。</p>
+<p>本系列文章基于以下版本来讲述如何使用二进制方式安装Kubernetes集群顺便讲述下踩坑的心路历程：</p>
+<ul>
+<li>Kubernetes version: <code>v1.10</code></li>
+<li>System: <code>CentOS Linux 7</code></li>
+<li>Kernel: <code>Linux 3.10.0</code></li>
+</ul></div>
+<p>Kubernetes系统的各个组件需要使用TLS证书对其通信加密以及授权认证，所以在部署之前我们需要先生成相关的TLS证书以便后续操作能够顺利进行。</p>
+<a id="more"></a>
+<hr>
+<blockquote>
+<p>在后续安装部署中，将不使用kube-apiserver的HTTP非安全端口，所有组件都启用TLS双向认证通信。因此TLS证书配置是在安装配置Kubernetes系统中最容易出错和难于排查问题的一步，所以请务必耐心仔细。</p>
+</blockquote>
+<p>在开始前，为了模拟集群节点，我们假定需要在以下三台Linux主机上部署Kubernetes:</p>
+<ul>
+<li><code>10.138.148.161</code>：作为<code>master</code>节点</li>
+<li><code>10.138.196.180</code>：作为<code>Node</code>节点</li>
+<li><code>10.138.212.68</code>：作为<code>Node</code>节点</li>
+</ul>
+<div class="note danger"><p>同一台主机上可以同时部署master和Node节点相关组件，即同时作为控制节点和工作节点，不过这么做可能导致master节点负载过高而失去响应进而导致整个集群出现无法预知的问题。</p></div>
+<hr>
+<h3 id="安装CFSSL证书生成工具"><a href="#安装CFSSL证书生成工具" class="headerlink" title="安装CFSSL证书生成工具"></a>安装<code>CFSSL</code>证书生成工具</h3><div class="note info"><p>我们将使用<code>Cloudflare</code>的PKI工具集<a href="https://github.com/cloudflare/cfssl" target="_blank" rel="noopener">cloudflare/cfssl</a>来生成集群所需要的各种<code>TLS</code>证书。</p></div>
+<p>执行以下命令直接下载二进制文件进行安装:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">wget https://pkg.cfssl.org/R1.2/cfssl_linux-amd64 -O cfssl </span><br><span class="line">chmod +x cfssl </span><br><span class="line">sudo mv cfssl /usr/<span class="built_in">local</span>/bin</span><br><span class="line"></span><br><span class="line">wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64 -O cfssljson </span><br><span class="line">chmod +x cfssljson </span><br><span class="line">sudo mv cfssljson /usr/<span class="built_in">local</span>/bin</span><br><span class="line"></span><br><span class="line">wget https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64 -O cfssl-certinfo </span><br><span class="line">chmod +x cfssl-certinfo </span><br><span class="line">sudo mv cfssl-certinfo /usr/<span class="built_in">local</span>/bin</span><br><span class="line"></span><br><span class="line"><span class="built_in">export</span> PATH=/usr/<span class="built_in">local</span>/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure>
+<h3 id="创建CA根证书（Certificate-Authority）"><a href="#创建CA根证书（Certificate-Authority）" class="headerlink" title="创建CA根证书（Certificate Authority）"></a>创建CA根证书（Certificate Authority）</h3><p>CA（Certificate Authority）是自签名的根证书，用来签名后续创建的其它 TLS 证书；<br>确认<code>CFSSL</code>工具安装成功之后，我们先通过<code>CFSSL</code>工具来创建模版配置json文件:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cfssl <span class="built_in">print</span>-defaults config &gt; config.json</span><br><span class="line">cfssl <span class="built_in">print</span>-defaults csr &gt; csr.json</span><br></pre></td></tr></table></figure>
+<h4 id="创建CA配置文件"><a href="#创建CA配置文件" class="headerlink" title="创建CA配置文件"></a>创建CA配置文件</h4><p>这将生成两个模版json文件，后续<code>CFSSL</code>将读取json文件内容并生成对应的<code>pem</code>文件。我们先复制<code>config.json</code>为<code>ca-config.json</code>文件并做如下修改:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"signing"</span>: &#123;</span><br><span class="line">        <span class="attr">"default"</span>: &#123;</span><br><span class="line">            <span class="attr">"expiry"</span>: <span class="string">"99999h"</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">"profiles"</span>: &#123;</span><br><span class="line">            <span class="attr">"kubernetes"</span>: &#123;</span><br><span class="line">                <span class="attr">"expiry"</span>: <span class="string">"99999h"</span>,</span><br><span class="line">                <span class="attr">"usages"</span>: [</span><br><span class="line">                    <span class="string">"signing"</span>,</span><br><span class="line">                    <span class="string">"key encipherment"</span>,</span><br><span class="line">                    <span class="string">"server auth"</span>,</span><br><span class="line">                    <span class="string">"client auth"</span></span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note warning"><p><code>profiles</code>：可以定义多个profiles，分别指定不同的过期时间、使用场景等参数；后续在签名证书时使用某个特定的profile。</p>
+<p><code>signing</code>：表示该证书可用于签名(签发)其它证书，生成的 ca.pem 证书中 CA=TRUE。</p>
+<p><code>server auth</code>：表示`client可以用该 CA（生成的ca.pem） 对server提供的证书进行验证。</p>
+<p><code>client auth</code>：表示server可以用该CA(生成的ca.pem）对client提供的证书进行验证。</p></div>
+<h4 id="创建CA证书签名请求"><a href="#创建CA证书签名请求" class="headerlink" title="创建CA证书签名请求"></a>创建CA证书签名请求</h4><p>我们复制<code>csr.json</code>为<code>ca-csr.json</code>并做以下修改:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"CN"</span>: <span class="string">"kubernetes"</span>,</span><br><span class="line">  <span class="attr">"key"</span>: &#123;</span><br><span class="line">    <span class="attr">"algo"</span>: <span class="string">"rsa"</span>,</span><br><span class="line">    <span class="attr">"size"</span>: <span class="number">2048</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"names"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"C"</span>: <span class="string">"CN"</span>,</span><br><span class="line">      <span class="attr">"ST"</span>: <span class="string">"Shanghai"</span>,</span><br><span class="line">      <span class="attr">"L"</span>: <span class="string">"Shanghai"</span>,</span><br><span class="line">      <span class="attr">"O"</span>: <span class="string">"k8s"</span>,</span><br><span class="line">      <span class="attr">"OU"</span>: <span class="string">"System"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note warning"><p><code>CN</code>(<code>Common Name</code>):后续<code>kube-apiserver</code>组件将从证书中提取该字段作为请求的用户名；</p>
+<p><code>O</code>(<code>Organtzation</code>):后续<code>kube-apiserver</code>组件将从证书中提取该字段作为请求的用户所属的用户组；</p></div>
+<h4 id="生成CA证书和私钥"><a href="#生成CA证书和私钥" class="headerlink" title="生成CA证书和私钥"></a>生成CA证书和私钥</h4><p>执行以下命令来生成CA证书和私钥：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cfssl gencert -initca ca-csr.json | cfssljson -bare ca</span><br><span class="line">ls ca*</span><br><span class="line">ca.csr  ca-csr.json  ca-key.pem  ca.pem</span><br></pre></td></tr></table></figure>
+<p>这样，我们就生成了CA证书和私钥了，因为我们需要双向<code>TLS</code>认证，所以需要拷贝<code>ca-key.pem</code>和<code>ca.pem</code>到所有要部署的机器的<code>/etc/kubernetes/ssl</code>目录下备用。</p>
+<h3 id="创建kubernetes组件认证授权证书"><a href="#创建kubernetes组件认证授权证书" class="headerlink" title="创建kubernetes组件认证授权证书"></a>创建kubernetes组件认证授权证书</h3><p>因为我们准备部署的kubernetes组件是使用<code>TLS</code>双向认证的，包括<code>kube-apiserver</code>不打算使用HTTP端口，因此，我们需要生成以下的证书以供后续组件部署的时候备用：</p>
+<div class="note info"><ul>
+<li><code>etcd</code>证书：etcd集群之间通信加密使用的<code>TLS</code>证书。</li>
+<li><code>kube-apiserver</code>证书：配置<code>kube-apiserver</code>组件的证书。</li>
+<li><code>kube-controller-manager</code>证书：用于和<code>kube-apiserver</code>通信认证的证书。</li>
+<li><code>kube-scheduler</code>证书：用于和<code>kube-apiserver</code>通信认证的证书。</li>
+<li><code>kubelet</code>证书【可选,非必需】：用于和<code>kube-apiserver</code>通信认证的证书，如果使用<code>TLS Bootstarp</code>认证方式，将没有必要配置。</li>
+<li><code>kube-proxy</code>证书【可选,非必需】：用于和<code>kube-apiserver</code>通信认证的证书，如果使用<code>TLS Bootstarp</code>认证方式，将没有必要配置。</li>
+</ul></div>
+<p>下面我们将逐个创建对应的<code>TLS</code>证书，并做相应的简短说明：</p>
+<h4 id="创建etcd证书："><a href="#创建etcd证书：" class="headerlink" title="创建etcd证书："></a>创建<code>etcd</code>证书：</h4><p>首选我们创建<code>etcd</code>证书签名请求(CSR)，拷贝<code>csr.json</code>为<code>etcd-csr.json</code>并做以下修改:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"CN"</span>: <span class="string">"etcd"</span>,</span><br><span class="line">    <span class="attr">"hosts"</span>: [</span><br><span class="line">      <span class="string">"127.0.0.1"</span>,</span><br><span class="line">      <span class="string">"10.138.212.68"</span>,</span><br><span class="line">      <span class="string">"10.138.196.180"</span>,</span><br><span class="line">      <span class="string">"10.138.148.161"</span>,</span><br><span class="line">        <span class="string">"master"</span>,</span><br><span class="line">        <span class="string">"node1"</span>,</span><br><span class="line">        <span class="string">"node2"</span></span><br><span class="line">    ],</span><br><span class="line">  <span class="attr">"key"</span>: &#123;</span><br><span class="line">    <span class="attr">"algo"</span>: <span class="string">"rsa"</span>,</span><br><span class="line">    <span class="attr">"size"</span>: <span class="number">2048</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"names"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"C"</span>: <span class="string">"CN"</span>,</span><br><span class="line">      <span class="attr">"ST"</span>: <span class="string">"Shanghai"</span>,</span><br><span class="line">      <span class="attr">"L"</span>: <span class="string">"Shanghai"</span>,</span><br><span class="line">      <span class="attr">"O"</span>: <span class="string">"k8s"</span>,</span><br><span class="line">      <span class="attr">"OU"</span>: <span class="string">"System"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note danger"><p>此处需要指定<code>host</code>字段的值，该值为所有需要部署etcd节点的<code>ip 域名 或者 hostname</code>，etcd需要使用<code>Subject Alternative Name（SAN）</code>来校验集群以及防止滥用。如果你不清楚应该使用哪个ip，默认情况下使用<code>ip a</code>查看<code>eth0</code>即可。此处指定的<code>ip</code>与后续指定的<code>etcd的systemd</code>配置<code>initial-cluster</code>相关。</p>
+<p>相关阅读: <a href="https://github.com/coreos/etcd/issues/2056" target="_blank" rel="noopener">Option to accept TLS client certificates even if they lack correct Subject Alternative Names</a></p></div>
+<p>生成<code>etcd</code>证书和私钥：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes etcd-csr.json | cfssljson -bare etcd</span><br><span class="line">ls etcd*</span><br><span class="line">etcd.csr  etcd-csr.json  etcd-key.pem etcd.pem</span><br></pre></td></tr></table></figure>
+<p>将生成的<code>etch-key.pem</code>和<code>etcd.pem</code>拷贝到所有需要部署<code>etcd</code>集群的服务器<code>/etc/etcd/ssl</code>目录下备用。</p>
+<h4 id="创建kube-apiserver证书"><a href="#创建kube-apiserver证书" class="headerlink" title="创建kube-apiserver证书"></a>创建<code>kube-apiserver</code>证书</h4><p>创建<code>kube-apiserver</code>证书签名请求配置文件，拷贝<code>csr.json</code>为<code>kubernetes-csr.json</code>并做以下修改：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"CN"</span>: <span class="string">"kubernetes"</span>,</span><br><span class="line">    <span class="attr">"hosts"</span>: [</span><br><span class="line">      <span class="string">"127.0.0.1"</span>,</span><br><span class="line">      <span class="string">"10.138.212.68"</span>,</span><br><span class="line">      <span class="string">"10.138.196.180"</span>,</span><br><span class="line">      <span class="string">"10.138.148.161"</span>,</span><br><span class="line">      <span class="string">"10.254.0.1"</span>,</span><br><span class="line">      <span class="string">"kubernetes"</span>,</span><br><span class="line">      <span class="string">"kubernetes.default"</span>,</span><br><span class="line">      <span class="string">"kubernetes.default.svc"</span>,</span><br><span class="line">      <span class="string">"kubernetes.default.svc.cluster"</span>,</span><br><span class="line">      <span class="string">"kubernetes.default.svc.cluster.local"</span></span><br><span class="line">    ],</span><br><span class="line">    <span class="attr">"key"</span>: &#123;</span><br><span class="line">        <span class="attr">"algo"</span>: <span class="string">"rsa"</span>,</span><br><span class="line">        <span class="attr">"size"</span>: <span class="number">2048</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"names"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"C"</span>: <span class="string">"CN"</span>,</span><br><span class="line">            <span class="attr">"ST"</span>: <span class="string">"Shanghai"</span>,</span><br><span class="line">            <span class="attr">"L"</span>: <span class="string">"Shanghai"</span>,</span><br><span class="line">            <span class="attr">"O"</span>: <span class="string">"k8s"</span>,</span><br><span class="line">            <span class="attr">"OU"</span>: <span class="string">"System"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note warning"><p>此处指定了<code>host</code>字段来表示授权使用该证书的<code>ip或域名</code>列表，因此上述配置文件指定了要部署的kubernetes三台服务器ip（实际上只需要指定打算部署master节点的ip即可）以及<code>kube-apiserver</code>注册的名为<code>kubernetes</code>服务的服务ip（一般默认为后续配置<code>kube-apiserve</code>组件的时候指定的<code>—service-cluster-ip-range</code>网段的第一个ip。）如果你不清楚怎么操作，可以留空<code>host</code>字段。</p>
+<p>如果你指定了<code>host</code>字段，这里如果有 <code>VIP</code> 的，也是需要填写的。</p></div>
+<p>生成<code>kube-apiserver</code>证书和私钥：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes kubernetes-csr.json | cfssljson -bare apiserver</span><br><span class="line">ls apiserver*</span><br><span class="line">apiserver.csr  apiserver-key.pem  apiserver.pem</span><br></pre></td></tr></table></figure>
+<p>我们将该证书拷贝到需要部署到<code>master</code>节点上的<code>/etc/kubernetes/ssl</code>上备用。</p>
+<div class="note info"><p>因为我们master节点的组件之间的通信使用<code>非HTTP</code>的安全端口，所以同样也需要<code>TLS</code>认证授权，因此我们也需要配置<code>kube-controller-manager</code>和<code>kube-scheduler</code>的证书来供这两个组件访问<code>kube-apiserver</code>.如果你的集群master节点组件使用HTTP非安全端口通信，那么可以不需要配置这两个证书。</p></div>
+<h4 id="创建kube-controller-manager证书"><a href="#创建kube-controller-manager证书" class="headerlink" title="创建kube-controller-manager证书"></a>创建<code>kube-controller-manager</code>证书</h4><p>复制<code>car.json</code>为<code>kube-controller-manager-csr.json</code>并做以下修改：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"CN"</span>: <span class="string">"system:kube-controller-manager"</span>,</span><br><span class="line">  <span class="attr">"hosts"</span>: [],</span><br><span class="line">  <span class="attr">"key"</span>: &#123;</span><br><span class="line">    <span class="attr">"algo"</span>: <span class="string">"rsa"</span>,</span><br><span class="line">    <span class="attr">"size"</span>: <span class="number">2048</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"names"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"C"</span>: <span class="string">"CN"</span>,</span><br><span class="line">      <span class="attr">"ST"</span>: <span class="string">"Shanghai"</span>,</span><br><span class="line">      <span class="attr">"L"</span>: <span class="string">"Shanghai"</span>,</span><br><span class="line">      <span class="attr">"O"</span>: <span class="string">"k8s"</span>,</span><br><span class="line">      <span class="attr">"OU"</span>: <span class="string">"System"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述的配置中，<code>kube-apiserver</code>将提取<code>CN</code>作为客户端组件(kube-controller-manager)的用户名(system:kube-controller-manager)，<code>kube-apiserver</code>预定义的RBAC使用ClusterRoleBinding <code>system:kube-controller-manager</code>将<code>用户system:kube-controller-manager</code>与<code>ClusterRole system:kube-controller-manager</code>绑定。</p>
+<p>生成<code>kube-controller-manager</code>证书和私钥：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes kube-controller-manager-csr.json | cfssljson -bare controller-manager</span><br><span class="line">ls controller-manager*</span><br><span class="line">controller-manager.csr  controller-manager-key.pem  controller-manager.pem</span><br></pre></td></tr></table></figure>
+<p>将证书拷贝到需要部署<code>kube-controller-manager</code>的master节点<code>/etc/kubernetes/ssl</code>上备用。</p>
+<h4 id="创建kube-scheduler-证书"><a href="#创建kube-scheduler-证书" class="headerlink" title="创建kube-scheduler`证书"></a>创建kube-scheduler`证书</h4><p>与<code>kube-controller-manager</code>一样，<code>kube-scheduler</code>同样也需要<code>TLS</code>证书来访问<code>kube-apiserver</code>。此处不再赘述。直接上<code>kube-scheduler-csr.json</code>文件内容：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"CN"</span>: <span class="string">"system:kube-scheduler"</span>,</span><br><span class="line">  <span class="attr">"hosts"</span>: [],</span><br><span class="line">  <span class="attr">"key"</span>: &#123;</span><br><span class="line">    <span class="attr">"algo"</span>: <span class="string">"rsa"</span>,</span><br><span class="line">    <span class="attr">"size"</span>: <span class="number">2048</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"names"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"C"</span>: <span class="string">"CN"</span>,</span><br><span class="line">      <span class="attr">"ST"</span>: <span class="string">"Shanghai"</span>,</span><br><span class="line">      <span class="attr">"L"</span>: <span class="string">"Shanghai"</span>,</span><br><span class="line">      <span class="attr">"O"</span>: <span class="string">"k8s"</span>,</span><br><span class="line">      <span class="attr">"OU"</span>: <span class="string">"System"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code></code>kube-scheduler <code>将提取</code>CN作为客户端的用户名<code>,这里是</code>system:kube-scheduler<code>。 kube-apiserver 预定义的 RBAC 使用的 ClusterRoleBindings</code>system:kube-scheduler <code>将</code>用户system:kube-scheduler <code>与</code>ClusterRole system:kube-scheduler `绑定。</p>
+<p>生成<code>kube-scheduler</code>证书以及私钥：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes kube-scheduler-csr.json | cfssljson -bare scheduler</span><br><span class="line">ls scheduler*</span><br><span class="line">scheduler.csr  scheduler-key.pem  scheduler.pem</span><br></pre></td></tr></table></figure>
+<p>将证书拷贝到需要部署<code>kube-scheduler</code>的master节点<code>/etc/kubernetes/ssl</code>上备用。</p>
+<p>至此，<code>master</code>节点上的证书生成就全部完成了，接下来是生成<code>worker</code>节点的证书，需要注意的是：生成<code>worker</code>证书是可选的，如果你使用<code>TLS Bootstarpping</code>那么你可以跳过以下步骤<code>worker</code>证书生成工作。直接转到部署的实际操作环节。关于<code>TLS</code>证书和<code>TLS Bootstarpping</code>认证方式的区别，后续考虑单独写一遍文章展开来讲。</p>
+<hr>
+<h4 id="创建kubelet证书"><a href="#创建kubelet证书" class="headerlink" title="创建kubelet证书"></a>创建<code>kubelet</code>证书</h4><p>拷贝<code>car.json</code>为<code>kubelet-csr.json</code>并做以下修改:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"CN"</span>: <span class="string">"system:node:node"</span>,</span><br><span class="line">  <span class="attr">"hosts"</span>: [],</span><br><span class="line">  <span class="attr">"key"</span>: &#123;</span><br><span class="line">    <span class="attr">"algo"</span>: <span class="string">"rsa"</span>,</span><br><span class="line">    <span class="attr">"size"</span>: <span class="number">2048</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"names"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"C"</span>: <span class="string">"CN"</span>,</span><br><span class="line">      <span class="attr">"ST"</span>: <span class="string">"Shanghai"</span>,</span><br><span class="line">      <span class="attr">"L"</span>: <span class="string">"Shanghai"</span>,</span><br><span class="line">      <span class="attr">"O"</span>: <span class="string">"system:nodes"</span>,</span><br><span class="line">      <span class="attr">"OU"</span>: <span class="string">"System"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note warning"><p><code>O</code>为用户组，kubernetes RBAC定义了ClusterRoleBinding将Group system:nodes和CLusterRole system:node关联起来。</p>
+<p>注意:在<code>kubernetes v1.8+</code>以上版本，将不会自动创建<code>binding</code>,因此我们后续需要手动创建绑定关系。</p></div>
+<p>生成<code>kubelet</code>证书和私钥：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes kubelet-csr.json | cfssljson -bare kubelet</span><br><span class="line">ls kubelet*</span><br><span class="line">kubelet.csr  kubelet-csr.json  kubelet-key.pem  kubelet.pem</span><br></pre></td></tr></table></figure>
+<p>将生成的证书和秘钥拷贝到所有需要部署的worker节点上的<code>/etc/kubernetes/ssl</code>下备用。</p>
+<h4 id="创建kube-proxy证书"><a href="#创建kube-proxy证书" class="headerlink" title="创建kube-proxy证书"></a>创建<code>kube-proxy</code>证书</h4><p>拷贝<code>car.json</code>为<code>kube-proxy-csr.json</code>并做以下修改:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"CN"</span>: <span class="string">"system:kube-proxy"</span>,</span><br><span class="line">  <span class="attr">"hosts"</span>: [],</span><br><span class="line">  <span class="attr">"key"</span>: &#123;</span><br><span class="line">    <span class="attr">"algo"</span>: <span class="string">"rsa"</span>,</span><br><span class="line">    <span class="attr">"size"</span>: <span class="number">2048</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"names"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"C"</span>: <span class="string">"CN"</span>,</span><br><span class="line">      <span class="attr">"ST"</span>: <span class="string">"Shanghai"</span>,</span><br><span class="line">      <span class="attr">"L"</span>: <span class="string">"Shanghai"</span>,</span><br><span class="line">      <span class="attr">"O"</span>: <span class="string">"k8s"</span>,</span><br><span class="line">      <span class="attr">"OU"</span>: <span class="string">"System"</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="note warning"><p><code>CN</code> 指定该证书的 User为 system:kube-proxy。Kubernetes RBAC定义了ClusterRoleBinding将<code>system:kube-proxy用户</code>与<code>system:node-proxier 角色</code>绑定。system:node-proxier具有kube-proxy组件访问ApiServer的相关权限。</p></div>
+<p>生成<code>kube-proxy</code>证书和私钥：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cfssl gencert -ca=ca.pem -ca-key=ca-key.pem -config=ca-config.json -profile=kubernetes kube-proxy-csr.json | cfssljson -bare kube-proxy</span><br><span class="line">ls kube-proxy*</span><br><span class="line">kube-proxy.csr  kube-proxy-csr.json  kube-proxy-key.pem  kube-proxy.pem</span><br></pre></td></tr></table></figure>
+<p>将生成的证书和私钥拷贝到所有需要部署<code>worker</code>节点的<code>/etc/kubernetes/ssl</code>下备用。</p>
+<p>在完成证书分发之后，这样我们的证书相关的生成工作就完成了。接下来开始配置各个组件。</p>
+<p>参考资料：</p>
+<ul>
+<li><a href="https://kubernetes.io/docs/admin/authorization/rbac/" target="_blank" rel="noopener">Using RBAC Authorization</a></li>
+<li><a href="https://wiki.shileizcc.com/display/KUB/Kubernetes+HA+Cluster+Build" target="_blank" rel="noopener">Kubernetes HA Cluster Build</a></li>
+<li><a href="https://jimmysong.io/kubernetes-handbook/practice/install-kubernetes-on-centos.html" target="_blank" rel="noopener">在CentOS上部署kubernetes集群</a></li>
+</ul>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>夏末</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://notes.wanghao.work/2018-03-26-Kubernetes集群之路之TLS证书配置.html" title="Kubernetes集群之路（一）TLS证书配置">https://notes.wanghao.work/2018-03-26-Kubernetes集群之路之TLS证书配置.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+            <a href="/tags/kubernetes/" rel="tag"># kubernetes</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018-01-26-lua读取redis数据的null判断.html" rel="next" title="lua读取redis数据的null判断">
+                <i class="fa fa-chevron-left"></i> lua读取redis数据的null判断
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018-04-26-kubernetes集群之路etcd集群部署.html" rel="prev" title="Kubernetes集群之路（二）etcd集群部署">
+                Kubernetes集群之路（二）etcd集群部署 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="夏末">
+            
+              <p class="site-author-name" itemprop="name">夏末</p>
+              <p class="site-description motion-element" itemprop="description">Keep fucking the world</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/Mokasa__" target="_blank" title="Twitter" rel="external nofollow"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.instagram.com/___xiamo/" target="_blank" title="Instagram" rel="external nofollow"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/doublemine" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank" rel="external nofollow">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.labradors.work/" title="Kevin" target="_blank">Kevin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.kisence.com/" title="kisence" target="_blank">kisence</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装CFSSL证书生成工具"><span class="nav-number">1.</span> <span class="nav-text">安装CFSSL证书生成工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建CA根证书（Certificate-Authority）"><span class="nav-number">2.</span> <span class="nav-text">创建CA根证书（Certificate Authority）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建CA配置文件"><span class="nav-number">2.1.</span> <span class="nav-text">创建CA配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建CA证书签名请求"><span class="nav-number">2.2.</span> <span class="nav-text">创建CA证书签名请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#生成CA证书和私钥"><span class="nav-number">2.3.</span> <span class="nav-text">生成CA证书和私钥</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建kubernetes组件认证授权证书"><span class="nav-number">3.</span> <span class="nav-text">创建kubernetes组件认证授权证书</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建etcd证书："><span class="nav-number">3.1.</span> <span class="nav-text">创建etcd证书：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建kube-apiserver证书"><span class="nav-number">3.2.</span> <span class="nav-text">创建kube-apiserver证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建kube-controller-manager证书"><span class="nav-number">3.3.</span> <span class="nav-text">创建kube-controller-manager证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建kube-scheduler-证书"><span class="nav-number">3.4.</span> <span class="nav-text">创建kube-scheduler`证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建kubelet证书"><span class="nav-number">3.5.</span> <span class="nav-text">创建kubelet证书</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建kube-proxy证书"><span class="nav-number">3.6.</span> <span class="nav-text">创建kube-proxy证书</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夏末</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" rel="external nofollow" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'jNtrKbh7n1iCujKSNNQ2AlH3',
+        appKey: 'l5SnKfDysKAOoMwfpVAFUDTR',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("jNtrKbh7n1iCujKSNNQ2AlH3", "l5SnKfDysKAOoMwfpVAFUDTR");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.3.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.3.0"></script>
+
+
+  
+
+  
+  
+  
+  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
+  <script type="text/javascript">
+  
+    bookmark.scrollToMark('auto', "#更多");
+  
+  </script>
+
+
+  
+
+</body>
+</html>

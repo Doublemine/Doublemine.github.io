@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.cat.net/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.3.0',
+    sidebar: {"position":"right","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="RPM软件包管理rpm包管理查询参数选项:  -a 查询所有已安装的软件包 -f 查询文件所属软件包 -p 查询软件包 -i 显示软件包信息 -l 显示软件包中的文件列表 -d 显示被标注为文档的文件列表 -c 显示被标注为配置文件的文件列表">
+<meta name="keywords" content="linux,rpm,apt,yum">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 学习笔记-软件包管理">
+<meta property="og:url" content="https://notes.wanghao.work/2015-04-24-Linux-学习笔记-软件包管理.html">
+<meta property="og:site_name" content="Doublemine">
+<meta property="og:description" content="RPM软件包管理rpm包管理查询参数选项:  -a 查询所有已安装的软件包 -f 查询文件所属软件包 -p 查询软件包 -i 显示软件包信息 -l 显示软件包中的文件列表 -d 显示被标注为文档的文件列表 -c 显示被标注为配置文件的文件列表">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-03T03:40:55.496Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux 学习笔记-软件包管理">
+<meta name="twitter:description" content="RPM软件包管理rpm包管理查询参数选项:  -a 查询所有已安装的软件包 -f 查询文件所属软件包 -p 查询软件包 -i 显示软件包信息 -l 显示软件包中的文件列表 -d 显示被标注为文档的文件列表 -c 显示被标注为配置文件的文件列表">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Doublemine" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://notes.wanghao.work/2015-04-24-Linux-学习笔记-软件包管理.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Linux 学习笔记-软件包管理 | Doublemine</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Doublemine</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://notes.wanghao.work/2015-04-24-Linux-学习笔记-软件包管理.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="夏末">
+      <meta itemprop="description" content="Keep fucking the world">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Doublemine">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Linux 学习笔记-软件包管理
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2015-04-24 10:06:02" itemprop="dateCreated datePublished" datetime="2015-04-24T10:06:02+00:00">2015-04-24</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-03 03:40:55" itemprop="dateModified" datetime="2019-07-03T03:40:55+00:00">2019-07-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习笔记/" itemprop="url" rel="index"><span itemprop="name">学习笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015-04-24-Linux-学习笔记-软件包管理.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2015-04-24-Linux-学习笔记-软件包管理.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2015-04-24-Linux-学习笔记-软件包管理.html" class="leancloud_visitors" data-flag-title="Linux 学习笔记-软件包管理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="RPM软件包管理"><a href="#RPM软件包管理" class="headerlink" title="RPM软件包管理"></a>RPM软件包管理</h1><h3 id="rpm包管理查询"><a href="#rpm包管理查询" class="headerlink" title="rpm包管理查询"></a>rpm包管理查询</h3><p>参数选项:</p>
+<ul>
+<li><code>-a</code> 查询所有已安装的软件包</li>
+<li><code>-f</code> 查询文件所属软件包</li>
+<li><code>-p</code> 查询软件包</li>
+<li><code>-i</code> 显示软件包信息</li>
+<li><code>-l</code> 显示软件包中的文件列表</li>
+<li><code>-d</code> 显示被标注为文档的文件列表</li>
+<li><code>-c</code> 显示被标注为配置文件的文件列表</li>
+</ul>
+<a id="more"></a>
+<blockquote>
+<p>rpm查询应用案列:</p>
+</blockquote>
+<ol start="0">
+<li>查看软件是否被安装:</li>
+</ol>
+<blockquote>
+<p><code>rpm -q xxxx软件包名</code>将显示指定的软件包名是否被安装。<br>以下示例将显示<code>sudo</code>命令是否被安装:</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -q sudo</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>-qa</code>将会显示所有被安装的软件包，从中过滤指定的软件包，可以使用管道组合命令:<br><code>rpm -qa | grep xxxx软件包名</code>来查看指定软件包是否被安装。</p>
+</blockquote>
+<p>以下示例将查询<code>sudo</code>命令是否被安装:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -qa | grep sudo</span></span><br></pre></td></tr></table></figure>
+<ol>
+<li>查询文件隶属的软件包: <blockquote>
+<p><code>rpm --qf xxxx软件包名</code> 其中<code>f</code>代表file的意思。</p>
+</blockquote>
+</li>
+</ol>
+<p>以下示例为查询<code>/etc/services</code>文件所属的软件包:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -qf /etc/services</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>查询软件包信息:<blockquote>
+<p><code>rpm -qi xxx软件包名</code>查询已安装包信息<br><code>rpm -qip xxxx.rpm</code>查询指定rpm软件包信息（未安装包信息）</p>
+</blockquote>
+</li>
+</ol>
+<p>以下示例为查询<code>sudo</code>命令软件包的信息:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -qi sudo</span></span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>查询软件包安装文件：<blockquote>
+<p><code>rpm -ql xxx软件包名</code>查询已安装软件包安装了哪些文件<br><code>rpm -qlp xxxx.rpm</code>查询指定的rpm软件包将会安装哪些文件（未安装包安装将会安装的文件） </p>
+</blockquote>
+</li>
+</ol>
+<p>以下示例为显示<code>sudo</code>命令软件包安装的文件:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -ql sudo</span></span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>查询软件包帮助文档:<blockquote>
+<p><code>rpm -qd xxx软件包名</code> 查询已安装的软件包安装的帮助文档<br><code>rpm -qdp xxx.rpm</code> 查询指定rpm软件包将会安装的帮助文档（未安装软件包将会安装的帮助文档）</p>
+</blockquote>
+</li>
+</ol>
+<p>以下示例将会显示<code>sudo</code>命令安装的帮助文档:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -qd sudo</span></span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>查询软件包配置文件： <blockquote>
+<p><code>rpm -qc xxxx软件包名</code> 查询已安装软件包包含的配置文件<br><code>rpmm -qcp xxxx.rpm</code> 查询指定rpm软件包将会安装的配置文件（为安装软件包将会安装的配置文件）</p>
+</blockquote>
+</li>
+</ol>
+<p>以下示例将会显示<code>sudo</code>命令安装的配置文件:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -qc sudo</span></span><br></pre></td></tr></table></figure>
+<p>学会这些，可以查看linux系统中的文件隶属于那个软件包，再查看该软件包的信息，以确定该软件包是否需要来确定软件包的开启与否。来达到服务器的精简不必要的软件运行以降低负载。</p>
+<h3 id="rpm软件包的安装、卸载"><a href="#rpm软件包的安装、卸载" class="headerlink" title="rpm软件包的安装、卸载"></a>rpm软件包的安装、卸载</h3><h4 id="卸载软件包"><a href="#卸载软件包" class="headerlink" title="卸载软件包:"></a>卸载软件包:</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#  rpm -e xxx软件包名</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其中<code>xxx软件包名</code>为软件包名称。<br>注意:如果其它软件包有依赖关系，卸载时会产生提示信息。可以使用–nodeps强行卸载。</p>
+</blockquote>
+<p>以下为强制卸载<code>samba</code>软件包 示例:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -e --nodeps samba</span></span><br></pre></td></tr></table></figure>
+<h4 id="安装本地rpm软件包"><a href="#安装本地rpm软件包" class="headerlink" title="安装本地rpm软件包:"></a>安装本地rpm软件包:</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -ivh xxxxxxxxx.rpm</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其中<code>-ivh</code>代表的意思为:</p>
+<ul>
+<li>i :安装（install）</li>
+<li>v :显示安装过程中的详细信息</li>
+<li>h :用<code>#</code>号显示安装进度（hash）</li>
+<li>U :用大写的U来表示升级安装（update）</li>
+</ul>
+</blockquote>
+<p>升级安装示例:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -Uvh xxxxx.rpm</span></span><br></pre></td></tr></table></figure></p>
+<p>如果想忽略进度和安装信息，直接安装可使用:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># rpm -i xxxxxxxxx.rpm</span><br></pre></td></tr></table></figure>
+<h4 id="安装本地软件包附带参数说明"><a href="#安装本地软件包附带参数说明" class="headerlink" title="安装本地软件包附带参数说明:"></a>安装本地软件包附带参数说明:</h4><p><code>--excludedocs</code></p>
+<blockquote>
+<p>不安装软件包中的文档文件(如果你已经足够熟悉这个软件包并且服务器空间紧张的话）</p>
+</blockquote>
+<p>以下为示例:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -ivh --excludedocs xxxxx.rpm</span></span><br></pre></td></tr></table></figure>
+<p><code>--prefix PATH</code></p>
+<blockquote>
+<p>将软件包安装到由<code>PATH</code>指定的路径下,通常不建议这样做或者说这样指定无效果。因为大部分rpm软件包在打包的时候开发人员指定了安装时软件包文件存放的位置了。</p>
+</blockquote>
+<p>以下为示例:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -ivh --prefix=/usr/xiamo/ xxxx.rpm</span></span><br></pre></td></tr></table></figure>
+<p><code>--test</code></p>
+<blockquote>
+<p>只对安装进行测试，并不实际安装。实际环境中比较有用的一个参数，可以测试安装软件包需要哪些依赖需要是否存在安装兼容性问题等等。</p>
+</blockquote>
+<p>以下为示例:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -ivh --test xxxx.rpm</span></span><br></pre></td></tr></table></figure>
+<p><code>--replacepkgs</code></p>
+<blockquote>
+<p>覆盖安装<br>软件包已经被安装,如果要覆盖安装该软件包，例如某个软件包的某个文件丢失，就可以覆盖安装。可以再命令行上使用该参数.</p>
+</blockquote>
+<p>以下为示例:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -ivh --replacepkgs xxxx.rpm</span></span><br></pre></td></tr></table></figure>
+<p><code>--replacefiles</code></p>
+<blockquote>
+<p>文件冲突<br>如果要安装的软件包中有一个文件已在安装其它软件包时安装，会出现错误信息，要想让rpm忽略该错误信息，请使用命令行选项。</p>
+</blockquote>
+<p>以下为示例:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -ivh --replacefiles xxxx.rpm</span></span><br></pre></td></tr></table></figure>
+<p><code>--nodeps</code></p>
+<blockquote>
+<p>未解决依赖关系<br>rpm软件包可能依赖于其它软件包，在安装了特定的软件包之后才能安装该软件包。你必须安装完所有依赖的软件包，才能解决这个问题。强制安装使用该选项。事实上，这样做安装好的软件包十有八九是无法运行的。这也是rpm比较头疼的地方。还好yum解决了这个问题:)</p>
+</blockquote>
+<p>以下为示例:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm -ivh --nodeps xxx.rpm</span></span><br></pre></td></tr></table></figure>
+<h3 id="rpm软件包校验"><a href="#rpm软件包校验" class="headerlink" title="rpm软件包校验"></a>rpm软件包校验</h3><blockquote>
+<p>在linux日常应用中，可能其它管理员误操作将某个软件包的文件更改了，这个时候，为了查看哪些文件被更改，就必须校验软件包是否被更改。<br><code>rpm -V 软件名称</code>将会校验指定的已安装的软件包。</p>
+<ul>
+<li>如果软件包没有被做过任何修改，那么执行该命令将不会有任何提示信息。</li>
+<li>如果软件包被改动过，那么将会出现提示信息。</li>
+</ul>
+</blockquote>
+<p>以下为提示信息代表的含义:</p>
+<ul>
+<li><code>5</code> 文件的md5校验值</li>
+<li><code>S</code> 文件大小</li>
+<li><code>L</code> 链接文件</li>
+<li><code>T</code> 文件的创建时间</li>
+<li><code>D</code> 设备文件按</li>
+<li><code>U</code> 文件的用户</li>
+<li><code>G</code> 文件的用户组</li>
+<li><code>M</code> 文件的权限</li>
+</ul>
+<h3 id="rpm软件包文件提取"><a href="#rpm软件包文件提取" class="headerlink" title="rpm软件包文件提取"></a>rpm软件包文件提取</h3><ul>
+<li><p>解压所有文件到当前目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm2cpio xxxxxx.rpm | cpio -idv</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>解压指定文件到当前目录</p>
+</li>
+</ul>
+<blockquote>
+<p>以下命令将指定的rpm解包，并将其中的的<code>/etc/inittab</code>文件提取到当前目录得<code>etc</code>目录下。（当前目录的<code>etc</code>目录下将会有一个<code>inittab</code>文件。)<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># rpm2cpio xxxx.rpm | cpio -idv ./etc/inittab</span></span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h2 id="yum软件包管理工具"><a href="#yum软件包管理工具" class="headerlink" title="yum软件包管理工具"></a>yum软件包管理工具</h2><p>应用yum包管理工具的好处:</p>
+<blockquote>
+<ul>
+<li>自动解决软件包依赖关系</li>
+<li>方便的软件包升级</li>
+<li>软件包可信任</li>
+</ul>
+</blockquote>
+<p>缺点:</p>
+<blockquote>
+<ul>
+<li>比rpm慢（需要读取yum源）</li>
+<li>需要联网</li>
+</ul>
+</blockquote>
+<h3 id="yum软件包常用选项"><a href="#yum软件包常用选项" class="headerlink" title="yum软件包常用选项:"></a>yum软件包常用选项:</h3><ul>
+<li>安装<blockquote>
+<p><code>yum install xxx软件包名</code>将会在yum源查找并安装该软件包。</p>
+</blockquote>
+</li>
+</ul>
+<p>以下为安装<code>sudo</code>命令示例:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum install sudo</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>检测升级 <blockquote>
+<p><code>yum check-update xxxx软件包名</code>将会在yum源查询指定软件是否有更新可用。(不会安装更新）</p>
+</blockquote>
+</li>
+</ul>
+<p>以下为检测<code>sudo</code>命令是否有更新可用示例:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum check-update sudo</span></span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<font color="red">如果不指定软件包名，将检测升级所有软件包。（只检测，不进行升级操作)</font>
+</blockquote>
+<p>以下为检测所有安装的软件包是否有更新可用:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum check-update</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>升级<blockquote>
+<p><code>yum update xxx软件包名</code>将会更新升级指定的软件包（如果有更新可用的话），因此次命令最好配合<code>yum check-update</code>使用。</p>
+</blockquote>
+</li>
+</ul>
+<p>以下为升级安装<code>sudo</code>软件包示例：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum update sudo</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>软件包查询<blockquote>
+<p><code>yum list</code>列出yum源上所有的软件包,并标注哪些软件包已安装，哪些软件包可更新。（此命令不时列出系统安装的软件包哦，而是yum源上的。所有一般不建议直接这样执行。可以使用管道配合<code>more</code>命令来分页查看。</p>
+</blockquote>
+</li>
+</ul>
+<p>以下为使用示例:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum list</span></span><br><span class="line"><span class="comment"># yum list | more</span></span><br></pre></td></tr></table></figure></p>
+<p>列出yum源上指定的软件包可以管道配合<code>grep</code>，以下为示例:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum list | grep sudo</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>软件包信息<blockquote>
+<p><code>yum info xxx软件包名</code> 列出软件包的详细信息以及软件包的作用介绍。</p>
+</blockquote>
+</li>
+</ul>
+<p>以下示例将会列出<code>sudo</code>命令的详细说明,以及该软件包的作用介绍:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum info sudo</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>卸载<blockquote>
+<p><code>yum remove xxxx软件名</code> 卸载指定的软件包</p>
+</blockquote>
+</li>
+</ul>
+<p>以下示例将会卸载<code>sudo</code>命令:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum remove sudo</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>帮助<blockquote>
+<p>查看更多的关系yum的帮助信息,来更好的了解yum软件包管理机制并且灵活的使用。</p>
+</blockquote>
+</li>
+</ul>
+<p>示例:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># yum --help</span></span><br><span class="line"><span class="comment"># man yum</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="源代码包安装"><a href="#源代码包安装" class="headerlink" title="源代码包安装"></a>源代码包安装</h2><blockquote>
+<p>源码安装不同于二进制包安装，它有着很高的自由度。可以个性化定制。但是也往往存在着缺少编译器而无法正常编译安装以及安装之后配置文件的管理问题。</p>
+</blockquote>
+<p>应用举例:</p>
+<blockquote>
+<p>此处用<code>proftpd</code>举例。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tar -zxvf proftpd-1.3.3d.tar.gz (解压源码包）</span></span><br><span class="line"><span class="comment"># cd proftpf-1.3.3d （进入源码包目录）</span></span><br><span class="line"><span class="comment"># ./config --prefix=/usr/local/proftpd （配置安装路径）</span></span><br><span class="line"><span class="comment"># make (编译）</span></span><br><span class="line"><span class="comment"># make install  （安装）</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>软件下载地址: <a href="http://www.proftpd.org" target="_blank" rel="noopener">www.proftpd.org</a></p>
+</blockquote>
+<p>其中，配置安装路径是非常必要的，因为源码安装不同于二进制安装。通常没有统一的卸载命令。存在管理不方便以及卸载不干净等问题。因此需要统一指定安装目录。习惯性的，将<code>/usr/local</code>设置为软件的安装目录，后面再跟上软件包的名称建立安装文件夹。</p>
+<h2 id="脚本安装"><a href="#脚本安装" class="headerlink" title="脚本安装"></a>脚本安装</h2><blockquote>
+<p>过于简单，就不解释了。。。</p>
+</blockquote>
+<h2 id="APT软件包管理"><a href="#APT软件包管理" class="headerlink" title="APT软件包管理"></a>APT软件包管理</h2><ul>
+<li>搜索软件包<blockquote>
+<p><code>apt-cache search xxx软件包名</code>将会搜索指定的软件包，并列出其所有的相关软件的信息。类似于<code>yum list</code></p>
+</blockquote>
+</li>
+</ul>
+<p>以下示例将会列出<code>sudo</code>命令的软件包:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># apt-cache search sudo</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>软件包信息<blockquote>
+<p><code>apt-cache show xxx软件包名</code>将会显示软件包的详细信息，并列出其作用介绍。类比于<code>yum info</code>。</p>
+</blockquote>
+</li>
+</ul>
+<p>以下示例将会显示<code>sudo</code>软件有关详细信息:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># apt-cache show sudo</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>安装<blockquote>
+<p><code>apt-get install xxx软件包名</code>将会安装制定的软件包。</p>
+<ul>
+<li><code>reinstall</code>参数替换install将会覆盖安装制定软件包。</li>
+<li><code>-f</code>参数将会修复安装制定软件包。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>以下示例将会安装、覆盖安装、修复安装<code>sudo</code>：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># apt-get install sudo (安装）</span></span><br><span class="line"><span class="comment"># apt-get reinstall sudo （覆盖安装）</span></span><br><span class="line"><span class="comment"># apt-get install -f sudo （修复安装）</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>删除卸载<blockquote>
+<p><code>apt-get remove xxx软件包名</code>将会卸载指定的软件包。</p>
+<ul>
+<li><code>autoremove</code>将会自动卸载依赖关系软件包（连同主程序的依赖一起卸载）</li>
+<li><code>--purge</code>连同软件的配置文件一起删除（不保留配置文件）。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+<p>以下示例将会卸载、连同依赖一起卸载、不保留配置文件卸载<code>sudo</code>：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># apt-get remove sudo (卸载）</span></span><br><span class="line"><span class="comment"># apt-get autoremove sudo （连同卸载sudo的依赖）</span></span><br><span class="line"><span class="comment"># apt-get remove --purge （卸载sudo以及配置文件）</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>更新软件源<blockquote>
+<p><code>apt-get update</code>更新软件源</p>
+</blockquote>
+</li>
+</ul>
+<p>示例:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># apt-get update</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>更新已安装软件包<blockquote>
+<p><code>apt-get upgrade</code>将会对已经安装的软件包进行更新。</p>
+</blockquote>
+</li>
+</ul>
+<p>示例:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># apt-get upgrade</span></span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>夏末</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://notes.wanghao.work/2015-04-24-Linux-学习笔记-软件包管理.html" title="Linux 学习笔记-软件包管理">https://notes.wanghao.work/2015-04-24-Linux-学习笔记-软件包管理.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/rpm/" rel="tag"># rpm</a>
+          
+            <a href="/tags/apt/" rel="tag"># apt</a>
+          
+            <a href="/tags/yum/" rel="tag"># yum</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015-04-21-android-常用代码片段.html" rel="next" title="android 常用代码片段">
+                <i class="fa fa-chevron-left"></i> android 常用代码片段
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015-04-29-欢迎光临我的博客.html" rel="prev" title="欢迎">
+                欢迎 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="夏末">
+            
+              <p class="site-author-name" itemprop="name">夏末</p>
+              <p class="site-description motion-element" itemprop="description">Keep fucking the world</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/Mokasa__" target="_blank" title="Twitter" rel="external nofollow"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.instagram.com/___xiamo/" target="_blank" title="Instagram" rel="external nofollow"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/doublemine" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank" rel="external nofollow">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.labradors.work/" title="Kevin" target="_blank">Kevin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.kisence.com/" title="kisence" target="_blank">kisence</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RPM软件包管理"><span class="nav-number">1.</span> <span class="nav-text">RPM软件包管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rpm包管理查询"><span class="nav-number">1.0.1.</span> <span class="nav-text">rpm包管理查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rpm软件包的安装、卸载"><span class="nav-number">1.0.2.</span> <span class="nav-text">rpm软件包的安装、卸载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#卸载软件包"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">卸载软件包:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装本地rpm软件包"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">安装本地rpm软件包:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装本地软件包附带参数说明"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">安装本地软件包附带参数说明:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rpm软件包校验"><span class="nav-number">1.0.3.</span> <span class="nav-text">rpm软件包校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rpm软件包文件提取"><span class="nav-number">1.0.4.</span> <span class="nav-text">rpm软件包文件提取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#yum软件包管理工具"><span class="nav-number">1.1.</span> <span class="nav-text">yum软件包管理工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#yum软件包常用选项"><span class="nav-number">1.1.1.</span> <span class="nav-text">yum软件包常用选项:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源代码包安装"><span class="nav-number">1.2.</span> <span class="nav-text">源代码包安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本安装"><span class="nav-number">1.3.</span> <span class="nav-text">脚本安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#APT软件包管理"><span class="nav-number">1.4.</span> <span class="nav-text">APT软件包管理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夏末</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" rel="external nofollow" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'jNtrKbh7n1iCujKSNNQ2AlH3',
+        appKey: 'l5SnKfDysKAOoMwfpVAFUDTR',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("jNtrKbh7n1iCujKSNNQ2AlH3", "l5SnKfDysKAOoMwfpVAFUDTR");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.3.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.3.0"></script>
+
+
+  
+
+  
+  
+  
+  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
+  <script type="text/javascript">
+  
+    bookmark.scrollToMark('auto', "#更多");
+  
+  </script>
+
+
+  
+
+</body>
+</html>

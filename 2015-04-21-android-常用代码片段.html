@@ -1,0 +1,1300 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.cat.net/css?family=Roboto Slab:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.3.0',
+    sidebar: {"position":"right","display":"hide","offset":12,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="前言 Android开发过程可能需要用到的代码片段，一共35则。供需要时借鉴参考。">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android 常用代码片段">
+<meta property="og:url" content="https://notes.wanghao.work/2015-04-21-android-常用代码片段.html">
+<meta property="og:site_name" content="Doublemine">
+<meta property="og:description" content="前言 Android开发过程可能需要用到的代码片段，一共35则。供需要时借鉴参考。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-03T03:40:55.496Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android 常用代码片段">
+<meta name="twitter:description" content="前言 Android开发过程可能需要用到的代码片段，一共35则。供需要时借鉴参考。">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Doublemine" type="application/atom+xml">
+
+
+
+
+  <link rel="canonical" href="https://notes.wanghao.work/2015-04-21-android-常用代码片段.html">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>android 常用代码片段 | Doublemine</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Doublemine</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://notes.wanghao.work/2015-04-21-android-常用代码片段.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="夏末">
+      <meta itemprop="description" content="Keep fucking the world">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Doublemine">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">android 常用代码片段
+              
+            
+          </h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2015-04-21 09:10:32" itemprop="dateCreated datePublished" datetime="2015-04-21T09:10:32+00:00">2015-04-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-03 03:40:55" itemprop="dateModified" datetime="2019-07-03T03:40:55+00:00">2019-07-03</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Android/" itemprop="url" rel="index"><span itemprop="name">Android</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015-04-21-android-常用代码片段.html#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2015-04-21-android-常用代码片段.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2015-04-21-android-常用代码片段.html" class="leancloud_visitors" data-flag-title="android 常用代码片段">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>Android开发过程可能需要用到的代码片段，一共<code>35</code>则。供需要时借鉴参考。<br><a id="more"></a></p>
+</blockquote>
+<h3 id="精确获取屏幕尺寸"><a href="#精确获取屏幕尺寸" class="headerlink" title="精确获取屏幕尺寸"></a>精确获取屏幕尺寸</h3><blockquote>
+<p>例如：3.5、4.0、5.0寸屏幕：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">double</span> <span class="title">getScreenPhysicalSize</span><span class="params">(Activity ctx)</span> </span>&#123;</span><br><span class="line">        DisplayMetrics dm = <span class="keyword">new</span> DisplayMetrics();</span><br><span class="line">        ctx.getWindowManager().getDefaultDisplay().getMetrics(dm);</span><br><span class="line">        <span class="keyword">double</span> diagonalPixels = Math.sqrt(Math.pow(dm.widthPixels, <span class="number">2</span>) + Math.pow(dm.heightPixels, <span class="number">2</span>));</span><br><span class="line">        <span class="keyword">return</span> diagonalPixels / (<span class="number">160</span> * dm.density);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="判断设备是否是平板"><a href="#判断设备是否是平板" class="headerlink" title="判断设备是否是平板"></a>判断设备是否是平板</h3><blockquote>
+<p>一般是7存以上是平板，此为官方用法。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isTablet</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (context.getResources().getConfiguration().screenLayout &amp; Configuration.SCREENLAYOUT_SIZE_MASK) &gt;= Configuration.SCREENLAYOUT_SIZE_LARGE;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="文字根据状态栏更改颜色"><a href="#文字根据状态栏更改颜色" class="headerlink" title="文字根据状态栏更改颜色"></a>文字根据状态栏更改颜色</h3><blockquote>
+<p>属性为:<code>android:textColor</code><br>此代码文件放置在项目的<code>res/color/</code>目录下:</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">selector</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:color</span>=<span class="string">"#53c1bd"</span> <span class="attr">android:state_selected</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:color</span>=<span class="string">"#53c1bd"</span> <span class="attr">android:state_focused</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:color</span>=<span class="string">"#53c1bd"</span> <span class="attr">android:state_pressed</span>=<span class="string">"true"</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:color</span>=<span class="string">"#777777"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">selector</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="背景色根据状态更改颜色"><a href="#背景色根据状态更改颜色" class="headerlink" title="背景色根据状态更改颜色"></a>背景色根据状态更改颜色</h3><blockquote>
+<p>属性为:<code>android:backgroup</code>,如果直接给背景色将会报错:</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">selector</span> <span class="attr">xmlns:android</span>=<span class="string">"http://schemas.android.com/apk/res/android"</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:state_selected</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;<span class="name">shape</span>&gt;</span>            </span><br><span class="line">            <span class="tag">&lt;<span class="name">gradient</span> <span class="attr">android:angle</span>=<span class="string">"0"</span> <span class="attr">android:centerColor</span>=<span class="string">"#00a59f"</span> <span class="attr">android:endColor</span>=<span class="string">"#00a59f"</span> <span class="attr">android:startColor</span>=<span class="string">"#00a59f"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">shape</span>&gt;</span><span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:state_focused</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;<span class="name">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">gradient</span> <span class="attr">android:angle</span>=<span class="string">"0"</span> <span class="attr">android:centerColor</span>=<span class="string">"#00a59f"</span> <span class="attr">android:endColor</span>=<span class="string">"#00a59f"</span> <span class="attr">android:startColor</span>=<span class="string">"#00a59f"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">shape</span>&gt;</span><span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">android:state_pressed</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;<span class="name">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">gradient</span> <span class="attr">android:angle</span>=<span class="string">"0"</span> <span class="attr">android:centerColor</span>=<span class="string">"#00a59f"</span> <span class="attr">android:endColor</span>=<span class="string">"#00a59f"</span> <span class="attr">android:startColor</span>=<span class="string">"#00a59f"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">shape</span>&gt;</span><span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">item</span>&gt;</span><span class="tag">&lt;<span class="name">shape</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">gradient</span> <span class="attr">android:angle</span>=<span class="string">"0"</span> <span class="attr">android:centerColor</span>=<span class="string">"#00ff00"</span> <span class="attr">android:endColor</span>=<span class="string">"00ff00"</span> <span class="attr">android:startColor</span>=<span class="string">"00ff00"</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">shape</span>&gt;</span><span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">selector</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="启动App默认的Activity"><a href="#启动App默认的Activity" class="headerlink" title="启动App默认的Activity"></a>启动App默认的Activity</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">startApkActivity</span><span class="params">(<span class="keyword">final</span> Context ctx, String packageName)</span> </span>&#123;</span><br><span class="line">        PackageManager pm = ctx.getPackageManager();</span><br><span class="line">        PackageInfo pi;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            pi = pm.getPackageInfo(packageName, <span class="number">0</span>);</span><br><span class="line">            Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_MAIN, <span class="keyword">null</span>);</span><br><span class="line">            intent.addCategory(Intent.CATEGORY_LAUNCHER);</span><br><span class="line">            intent.setPackage(pi.packageName);</span><br><span class="line"></span><br><span class="line">            List&lt;ResolveInfo&gt; apps = pm.queryIntentActivities(intent, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">            ResolveInfo ri = apps.iterator().next();</span><br><span class="line">            <span class="keyword">if</span> (ri != <span class="keyword">null</span>) &#123;</span><br><span class="line">                String className = ri.activityInfo.name;</span><br><span class="line">                intent.setComponent(<span class="keyword">new</span> ComponentName(packageName, className));</span><br><span class="line">                ctx.startActivity(intent);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (NameNotFoundException e) &#123;</span><br><span class="line">            Log.e(<span class="string">"startActivity"</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="计算字宽"><a href="#计算字宽" class="headerlink" title="计算字宽"></a>计算字宽</h3><blockquote>
+<p>如果设置了<code>textStyle</code>，还需要进一步设置<code>TextPaint</code>。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">float</span> <span class="title">GetTextWidth</span><span class="params">(String text, <span class="keyword">float</span> Size)</span> </span>&#123;</span><br><span class="line">        TextPaint FontPaint = <span class="keyword">new</span> TextPaint();</span><br><span class="line">        FontPaint.setTextSize(Size);</span><br><span class="line">        <span class="keyword">return</span> FontPaint.measureText(text);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="获取应用程序下所有的Activity"><a href="#获取应用程序下所有的Activity" class="headerlink" title="获取应用程序下所有的Activity"></a>获取应用程序下所有的Activity</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ArrayList&lt;String&gt; <span class="title">getActivities</span><span class="params">(Context ctx)</span> </span>&#123;</span><br><span class="line">      ArrayList&lt;String&gt; result = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">      Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_MAIN, <span class="keyword">null</span>);</span><br><span class="line">      intent.setPackage(ctx.getPackageName());</span><br><span class="line">      <span class="keyword">for</span> (ResolveInfo info : ctx.getPackageManager().queryIntentActivities(intent, <span class="number">0</span>)) &#123;</span><br><span class="line">          result.add(info.activityInfo.name);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> result;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="检测字符串中是否包含汉字"><a href="#检测字符串中是否包含汉字" class="headerlink" title="检测字符串中是否包含汉字"></a>检测字符串中是否包含汉字</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">checkChinese</span><span class="params">(String sequence)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> String format = <span class="string">"[\\u4E00-\\u9FA5\\uF900-\\uFA2D]"</span>;</span><br><span class="line">        <span class="keyword">boolean</span> result = <span class="keyword">false</span>;</span><br><span class="line">        Pattern pattern = Pattern.compile(format);</span><br><span class="line">        Matcher matcher = pattern.matcher(sequence);</span><br><span class="line">        result = matcher.find();</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="检测字符串中只能包含-中文、数字、下划线-、横线"><a href="#检测字符串中只能包含-中文、数字、下划线-、横线" class="headerlink" title="检测字符串中只能包含:中文、数字、下划线(_)、横线(-)"></a>检测字符串中只能包含:中文、数字、下划线(_)、横线(-)</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">checkNickname</span><span class="params">(String sequence)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> String format = <span class="string">"[^\\u4E00-\\u9FA5\\uF900-\\uFA2D\\w-_]"</span>;</span><br><span class="line">        Pattern pattern = Pattern.compile(format);</span><br><span class="line">        Matcher matcher = pattern.matcher(sequence);</span><br><span class="line">        <span class="keyword">return</span> !matcher.find();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="检查又没有应用程序来接受处理你发出的intent"><a href="#检查又没有应用程序来接受处理你发出的intent" class="headerlink" title="检查又没有应用程序来接受处理你发出的intent"></a>检查又没有应用程序来接受处理你发出的intent</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isIntentAvailable</span><span class="params">(Context context, String action)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">final</span> PackageManager packageManager = context.getPackageManager();</span><br><span class="line">        <span class="keyword">final</span> Intent intent = <span class="keyword">new</span> Intent(action);</span><br><span class="line">        List&lt;ResolveInfo&gt; list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);</span><br><span class="line">        <span class="keyword">return</span> list.size() &gt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用TransitionDrawable实现渐变效果"><a href="#使用TransitionDrawable实现渐变效果" class="headerlink" title="使用TransitionDrawable实现渐变效果"></a>使用<code>TransitionDrawable</code>实现渐变效果</h3><blockquote>
+<p>比使用<code>AlphaAnimation</code>效果要好，可以避免出现闪烁问题。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setImageBitmap</span><span class="params">(ImageView imageView, Bitmap bitmap)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Use TransitionDrawable to fade in.</span></span><br><span class="line">        <span class="keyword">final</span> TransitionDrawable td = <span class="keyword">new</span> TransitionDrawable(<span class="keyword">new</span> Drawable[] &#123; <span class="keyword">new</span> ColorDrawable(android.R.color.transparent), <span class="keyword">new</span> BitmapDrawable(mContext.getResources(), bitmap) &#125;);</span><br><span class="line">        <span class="comment">//noinspection deprecation</span></span><br><span class="line">            imageView.setBackgroundDrawable(imageView.getDrawable());</span><br><span class="line">        imageView.setImageDrawable(td);</span><br><span class="line">        td.startTransition(<span class="number">200</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="扫描指定文件"><a href="#扫描指定文件" class="headerlink" title="扫描指定文件"></a>扫描指定文件</h3><blockquote>
+<p>用途:从本软件新增、修改、删除图片、文件某一个文件（音频、视频）徐奥更新系统媒体库时使用。不必扫描整个SD卡。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sendBroadcast(<span class="keyword">new</span> Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, uri));</span><br></pre></td></tr></table></figure>
+<h3 id="Dip转px"><a href="#Dip转px" class="headerlink" title="Dip转px"></a>Dip转px</h3><blockquote>
+<p>用途：难免在Activity代码中设置位置、大小等，本方法就很有用了！ </p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">dipToPX</span><span class="params">(<span class="keyword">final</span> Context ctx, <span class="keyword">float</span> dip)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="keyword">int</span>)TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, ctx.getResources().getDisplayMetrics());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="获取已经安装的APK路径"><a href="#获取已经安装的APK路径" class="headerlink" title="获取已经安装的APK路径"></a>获取已经安装的APK路径</h3><blockquote>
+<p>代码:</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">PackageManager pm = getPackageManager();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (ApplicationInfo app : pm.getInstalledApplications(<span class="number">0</span>)) &#123;</span><br><span class="line">             Log.d(<span class="string">"PackageList"</span>, <span class="string">"package: "</span> + app.packageName + <span class="string">", sourceDir: "</span> + app.sourceDir);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>将会获得以下输出:</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span>: com.tmobile.thememanager, sourceDir: /system/app/ThemeManager.apk</span><br><span class="line">        <span class="keyword">package</span>: com.touchtype.swiftkey, sourceDir: /data/app/com.touchtype.swiftkey-<span class="number">1</span>.apk</span><br></pre></td></tr></table></figure>
+<h3 id="多进程Preferences数据共享"><a href="#多进程Preferences数据共享" class="headerlink" title="多进程Preferences数据共享"></a>多进程<code>Preferences</code>数据共享</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">putStringProcess</span><span class="params">(Context ctx, String key, String value)</span> </span>&#123;</span><br><span class="line">        SharedPreferences sharedPreferences = ctx.getSharedPreferences(<span class="string">"preference_mu"</span>, Context.MODE_MULTI_PROCESS);</span><br><span class="line">        Editor editor = sharedPreferences.edit();</span><br><span class="line">        editor.putString(key, value);</span><br><span class="line">        editor.commit();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getStringProcess</span><span class="params">(Context ctx, String key, String defValue)</span> </span>&#123;</span><br><span class="line">        SharedPreferences sharedPreferences = ctx.getSharedPreferences(<span class="string">"preference_mu"</span>, Context.MODE_MULTI_PROCESS);</span><br><span class="line">        <span class="keyword">return</span> sharedPreferences.getString(key, defValue);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="泛型ArrayList转数组"><a href="#泛型ArrayList转数组" class="headerlink" title="泛型ArrayList转数组"></a>泛型<code>ArrayList</code>转数组</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings</span>(<span class="string">"unchecked"</span>)</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; T[] toArray(Class&lt;?&gt; cls, ArrayList&lt;T&gt; items) &#123;</span><br><span class="line">        <span class="keyword">if</span> (items == <span class="keyword">null</span> || items.size() == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> (T[]) Array.newInstance(cls, <span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> items.toArray((T[]) Array.newInstance(cls, items.size()));</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="保存回复ListView当前为位置"><a href="#保存回复ListView当前为位置" class="headerlink" title="保存回复ListView当前为位置"></a>保存回复ListView当前为位置</h3><blockquote>
+<p>可以保存在<code>Preference</code>中或者是数据库中，数据加载完后再设置：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">saveCurrentPosition</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mListView != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> position = mListView.getFirstVisiblePosition();</span><br><span class="line">            View v = mListView.getChildAt(<span class="number">0</span>);</span><br><span class="line">            <span class="keyword">int</span> top = (v == <span class="keyword">null</span>) ? <span class="number">0</span> : v.getTop();</span><br><span class="line">            <span class="comment">//保存position和top</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">restorePosition</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mFolder != <span class="keyword">null</span> &amp;&amp; mListView != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">int</span> position = <span class="number">0</span>;<span class="comment">//取出保存的数据</span></span><br><span class="line">            <span class="keyword">int</span> top = <span class="number">0</span>;<span class="comment">//取出保存的数据</span></span><br><span class="line">            mListView.setSelectionFromTop(position, top);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="调用便携式热点和数据共享设置"><a href="#调用便携式热点和数据共享设置" class="headerlink" title="调用便携式热点和数据共享设置"></a>调用<code>便携式热点</code>和<code>数据共享</code>设置</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Intent <span class="title">getHotspotSetting</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Intent intent = <span class="keyword">new</span> Intent();</span><br><span class="line">        intent.setAction(Intent.ACTION_MAIN);</span><br><span class="line">        ComponentName com = <span class="keyword">new</span> ComponentName(<span class="string">"com.android.settings"</span>, <span class="string">"com.android.settings.TetherSettings"</span>);</span><br><span class="line">        intent.setComponent(com);</span><br><span class="line">        <span class="keyword">return</span> intent;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="格式化输出IP地址"><a href="#格式化输出IP地址" class="headerlink" title="格式化输出IP地址"></a>格式化输出IP地址</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getIp</span><span class="params">(Context ctx)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> Formatter.formatIpAddress((WifiManager) ctx.getSystemService(Context.WIFI_SERVICE).getConnectionInfo().getIpAddress());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="文件夹排序"><a href="#文件夹排序" class="headerlink" title="文件夹排序"></a>文件夹排序</h3><blockquote>
+<p>先文件夹排序，后文件排序</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sortFiles</span><span class="params">(File[] files)</span> </span>&#123;</span><br><span class="line">        Arrays.sort(files, <span class="keyword">new</span> Comparator&lt;File&gt;() &#123;</span><br><span class="line"></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(File lhs, File rhs)</span> </span>&#123;</span><br><span class="line">                <span class="comment">//返回负数表示o1 小于o2，返回0 表示o1和o2相等，返回正数表示o1大于o2。 </span></span><br><span class="line">                <span class="keyword">boolean</span> l1 = lhs.isDirectory();</span><br><span class="line">                <span class="keyword">boolean</span> l2 = rhs.isDirectory();</span><br><span class="line">                <span class="keyword">if</span> (l1 &amp;&amp; !l2)</span><br><span class="line">                    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span> (!l1 &amp;&amp; l2)</span><br><span class="line">                    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> lhs.getName().compareTo(rhs.getName());</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="发送不重复的通知（Notification）"><a href="#发送不重复的通知（Notification）" class="headerlink" title="发送不重复的通知（Notification）"></a>发送不重复的通知（Notification）</h3><blockquote>
+<p> 关键点在这个<code>requestCode</code>，这里使用的是当前系统时间，巧妙的保证了每次都是一个新的<code>Notification</code>产生。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">sendNotification</span><span class="params">(Context context, String title,</span></span></span><br><span class="line"><span class="function"><span class="params">            String message, Bundle extras)</span> </span>&#123;</span><br><span class="line">        Intent mIntent = <span class="keyword">new</span> Intent(context, FragmentTabsActivity.class);</span><br><span class="line">        mIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);</span><br><span class="line">        mIntent.putExtras(extras);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> requestCode = (<span class="keyword">int</span>) System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">        PendingIntent mContentIntent = PendingIntent.getActivity(context,</span><br><span class="line">                requestCode, mIntent, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        Notification mNotification = <span class="keyword">new</span> NotificationCompat.Builder(context)</span><br><span class="line">                .setContentTitle(title).setSmallIcon(R.drawable.app_icon)</span><br><span class="line">                .setContentIntent(mContentIntent).setContentText(message)</span><br><span class="line">                .build();</span><br><span class="line">        mNotification.flags |= Notification.FLAG_AUTO_CANCEL;</span><br><span class="line">        mNotification.defaults = Notification.DEFAULT_ALL;</span><br><span class="line"></span><br><span class="line">        NotificationManager mNotificationManager = (NotificationManager) context</span><br><span class="line">                .getSystemService(Context.NOTIFICATION_SERVICE);</span><br><span class="line"></span><br><span class="line">        mNotificationManager.notify(requestCode, mNotification);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="代码设置TextView的样式"><a href="#代码设置TextView的样式" class="headerlink" title="代码设置TextView的样式"></a>代码设置<code>TextView</code>的样式</h3><blockquote>
+<p>使用过<code>自定义Dialog</code>可能马上会想到用如下代码：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> TextView(<span class="keyword">this</span>,<span class="keyword">null</span>,R.style.text_style);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 但你运行这代码你会发现毫无作用！正确用法：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> TextView(<span class="keyword">new</span> ContextThemeWrapper(<span class="keyword">this</span>, R.style.text_style));</span><br></pre></td></tr></table></figure>
+<h3 id="ip地址转成8位16进制串"><a href="#ip地址转成8位16进制串" class="headerlink" title="ip地址转成8位16进制串"></a>ip地址转成8位16进制串</h3><blockquote>
+<p>ip:192.168.68.128 16 =&gt;hex :c0a84480</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** ip转16进制 */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">ipToHex</span><span class="params">(String ips)</span> </span>&#123;</span><br><span class="line">       StringBuffer result = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">       <span class="keyword">if</span> (ips != <span class="keyword">null</span>) &#123;</span><br><span class="line">           StringTokenizer st = <span class="keyword">new</span> StringTokenizer(ips, <span class="string">"."</span>);</span><br><span class="line">           <span class="keyword">while</span> (st.hasMoreTokens()) &#123;</span><br><span class="line">               String token = Integer.toHexString(Integer.parseInt(st.nextToken()));</span><br><span class="line">               <span class="keyword">if</span> (token.length() == <span class="number">1</span>)</span><br><span class="line">                   token = <span class="string">"0"</span> + token;</span><br><span class="line">               result.append(token);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> result.toString();</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">/** 16进制转ip */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">texToIp</span><span class="params">(String ips)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           StringBuffer result = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">           <span class="keyword">if</span> (ips != <span class="keyword">null</span> &amp;&amp; ips.length() == <span class="number">8</span>) &#123;</span><br><span class="line">               <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">8</span>; i += <span class="number">2</span>) &#123;</span><br><span class="line">                   <span class="keyword">if</span> (i != <span class="number">0</span>)</span><br><span class="line">                       result.append(<span class="string">'.'</span>);</span><br><span class="line">                   result.append(Integer.parseInt(ips.substring(i, i + <span class="number">2</span>), <span class="number">16</span>));</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">return</span> result.toString();</span><br><span class="line">       &#125; <span class="keyword">catch</span> (NumberFormatException ex) &#123;</span><br><span class="line">           Logger.e(ex);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="string">""</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="WebView保留缩放功能但隐藏缩放控件"><a href="#WebView保留缩放功能但隐藏缩放控件" class="headerlink" title="WebView保留缩放功能但隐藏缩放控件"></a><code>WebView</code>保留缩放功能但隐藏缩放控件</h3><blockquote>
+<p>注意：<code>setDisplayZoomControls</code>是在API Level 11中新增。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mWebView.getSettings().setSupportZoom(<span class="keyword">true</span>);</span><br><span class="line">       mWebView.getSettings().setBuiltInZoomControls(<span class="keyword">true</span>);</span><br><span class="line">       <span class="keyword">if</span> (DeviceUtils.hasHoneycomb())</span><br><span class="line">             mWebView.getSettings().setDisplayZoomControls(<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="获取网络类型名称"><a href="#获取网络类型名称" class="headerlink" title="获取网络类型名称"></a>获取网络类型名称</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getNetworkTypeName</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (context != <span class="keyword">null</span>) &#123;</span><br><span class="line">           ConnectivityManager connectMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);</span><br><span class="line">           <span class="keyword">if</span> (connectMgr != <span class="keyword">null</span>) &#123;</span><br><span class="line">               NetworkInfo info = connectMgr.getActiveNetworkInfo();</span><br><span class="line">               <span class="keyword">if</span> (info != <span class="keyword">null</span>) &#123;</span><br><span class="line">                   <span class="keyword">switch</span> (info.getType()) &#123;</span><br><span class="line">                   <span class="keyword">case</span> ConnectivityManager.TYPE_WIFI:</span><br><span class="line">                       <span class="keyword">return</span> <span class="string">"WIFI"</span>;</span><br><span class="line">                   <span class="keyword">case</span> ConnectivityManager.TYPE_MOBILE:</span><br><span class="line">                       <span class="keyword">return</span> getNetworkTypeName(info.getSubtype());</span><br><span class="line">                   &#125;</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> getNetworkTypeName(TelephonyManager.NETWORK_TYPE_UNKNOWN);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getNetworkTypeName</span><span class="params">(<span class="keyword">int</span> type)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">switch</span> (type) &#123;</span><br><span class="line">       <span class="keyword">case</span> TelephonyManager.NETWORK_TYPE_GPRS:</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"GPRS"</span>;</span><br><span class="line">       <span class="keyword">case</span> TelephonyManager.NETWORK_TYPE_EDGE:</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"EDGE"</span>;</span><br><span class="line">       <span class="keyword">case</span> TelephonyManager.NETWORK_TYPE_UMTS:</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"UMTS"</span>;</span><br><span class="line">       <span class="keyword">case</span> TelephonyManager.NETWORK_TYPE_HSDPA:</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"HSDPA"</span>;</span><br><span class="line">       <span class="keyword">case</span> TelephonyManager.NETWORK_TYPE_HSUPA:</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"HSUPA"</span>;</span><br><span class="line">       <span class="keyword">case</span> TelephonyManager.NETWORK_TYPE_HSPA:</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"HSPA"</span>;</span><br><span class="line">       <span class="keyword">case</span> TelephonyManager.NETWORK_TYPE_CDMA:</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"CDMA"</span>;</span><br><span class="line">       <span class="keyword">case</span> TelephonyManager.NETWORK_TYPE_EVDO_0:</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"CDMA - EvDo rev. 0"</span>;</span><br><span class="line">       <span class="keyword">case</span> TelephonyManager.NETWORK_TYPE_EVDO_A:</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"CDMA - EvDo rev. A"</span>;</span><br><span class="line">       <span class="keyword">case</span> TelephonyManager.NETWORK_TYPE_EVDO_B:</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"CDMA - EvDo rev. B"</span>;</span><br><span class="line">       <span class="keyword">case</span> TelephonyManager.NETWORK_TYPE_1xRTT:</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"CDMA - 1xRTT"</span>;</span><br><span class="line">       <span class="keyword">case</span> TelephonyManager.NETWORK_TYPE_LTE:</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"LTE"</span>;</span><br><span class="line">       <span class="keyword">case</span> TelephonyManager.NETWORK_TYPE_EHRPD:</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"CDMA - eHRPD"</span>;</span><br><span class="line">       <span class="keyword">case</span> TelephonyManager.NETWORK_TYPE_IDEN:</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"iDEN"</span>;</span><br><span class="line">       <span class="keyword">case</span> TelephonyManager.NETWORK_TYPE_HSPAP:</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"HSPA+"</span>;</span><br><span class="line">       <span class="keyword">default</span>:</span><br><span class="line">           <span class="keyword">return</span> <span class="string">"UNKNOWN"</span>;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>###Android解压Zip包</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 解压一个压缩文档 到指定位置</span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> zipFileString 压缩包的名字</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> outPathString 指定的路径</span></span><br><span class="line"><span class="comment">     * [url=home.php?mod=space&amp;uid=2643633]<span class="doctag">@throws</span>[/url] Exception</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">UnZipFolder</span><span class="params">(String zipFileString, String outPathString)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        java.util.zip.ZipInputStream inZip = <span class="keyword">new</span> java.util.zip.ZipInputStream(<span class="keyword">new</span> java.io.FileInputStream(zipFileString));</span><br><span class="line">        java.util.zip.ZipEntry zipEntry;</span><br><span class="line">        String szName = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> ((zipEntry = inZip.getNextEntry()) != <span class="keyword">null</span>) &#123;</span><br><span class="line">            szName = zipEntry.getName();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (zipEntry.isDirectory()) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// get the folder name of the widget</span></span><br><span class="line">                szName = szName.substring(<span class="number">0</span>, szName.length() - <span class="number">1</span>);</span><br><span class="line">                java.io.File folder = <span class="keyword">new</span> java.io.File(outPathString + java.io.File.separator + szName);</span><br><span class="line">                folder.mkdirs();</span><br><span class="line"></span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line"></span><br><span class="line">                java.io.File file = <span class="keyword">new</span> java.io.File(outPathString + java.io.File.separator + szName);</span><br><span class="line">                file.createNewFile();</span><br><span class="line">                <span class="comment">// get the output stream of the file</span></span><br><span class="line">                java.io.FileOutputStream out = <span class="keyword">new</span> java.io.FileOutputStream(file);</span><br><span class="line">                <span class="keyword">int</span> len;</span><br><span class="line">                <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">1024</span>];</span><br><span class="line">                <span class="comment">// read (len) bytes into buffer</span></span><br><span class="line">                <span class="keyword">while</span> ((len = inZip.read(buffer)) != -<span class="number">1</span>) &#123;</span><br><span class="line">                    <span class="comment">// write (len) byte from buffer at the position 0</span></span><br><span class="line">                    out.write(buffer, <span class="number">0</span>, len);</span><br><span class="line">                    out.flush();</span><br><span class="line">                &#125;</span><br><span class="line">                out.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="comment">//end of while</span></span><br><span class="line"></span><br><span class="line">        inZip.close();</span><br><span class="line"></span><br><span class="line">    &#125;<span class="comment">//end of func</span></span><br></pre></td></tr></table></figure>
+<h3 id="从assets中读取文本和图片资源"><a href="#从assets中读取文本和图片资源" class="headerlink" title="从assets中读取文本和图片资源"></a>从<code>assets</code>中读取文本和图片资源</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 从assets 文件夹中读取文本数据 */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getTextFromAssets</span><span class="params">(<span class="keyword">final</span> Context context, String fileName)</span> </span>&#123;</span><br><span class="line">       String result = <span class="string">""</span>;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           InputStream in = context.getResources().getAssets().open(fileName);</span><br><span class="line">           <span class="comment">// 获取文件的字节数</span></span><br><span class="line">           <span class="keyword">int</span> lenght = in.available();</span><br><span class="line">           <span class="comment">// 创建byte数组</span></span><br><span class="line">           <span class="keyword">byte</span>[] buffer = <span class="keyword">new</span> <span class="keyword">byte</span>[lenght];</span><br><span class="line">           <span class="comment">// 将文件中的数据读到byte数组中</span></span><br><span class="line">           in.read(buffer);</span><br><span class="line">           result = EncodingUtils.getString(buffer, <span class="string">"UTF-8"</span>);</span><br><span class="line">           in.close();</span><br><span class="line">       &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           e.printStackTrace();</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> result;</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">/** 从assets 文件夹中读取图片 */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Drawable <span class="title">loadImageFromAsserts</span><span class="params">(<span class="keyword">final</span> Context ctx, String fileName)</span> </span>&#123;</span><br><span class="line">       <span class="keyword">try</span> &#123;</span><br><span class="line">           InputStream is = ctx.getResources().getAssets().open(fileName);</span><br><span class="line">           <span class="keyword">return</span> Drawable.createFromStream(is, <span class="keyword">null</span>);</span><br><span class="line">       &#125; <span class="keyword">catch</span> (IOException e) &#123;</span><br><span class="line">           <span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; <span class="keyword">catch</span> (OutOfMemoryError e) &#123;</span><br><span class="line">           <span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">           <span class="keyword">if</span> (e != <span class="keyword">null</span>) &#123;</span><br><span class="line">               e.printStackTrace();</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="展开、收起状态栏"><a href="#展开、收起状态栏" class="headerlink" title="展开、收起状态栏"></a>展开、收起状态栏</h3><blockquote>
+<p>用途：可用于点击<code>Notifacation</code>之后收起状态栏</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">collapseStatusBar</span><span class="params">(Context ctx)</span> </span>&#123;</span><br><span class="line">        Object sbservice = ctx.getSystemService(<span class="string">"statusbar"</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class&lt;?&gt; statusBarManager = Class.forName(<span class="string">"android.app.StatusBarManager"</span>);</span><br><span class="line">            Method collapse;</span><br><span class="line">            <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.JELLY_BEAN_MR1) &#123;</span><br><span class="line">                collapse = statusBarManager.getMethod(<span class="string">"collapsePanels"</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                collapse = statusBarManager.getMethod(<span class="string">"collapse"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            collapse.invoke(sbservice);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">expandStatusBar</span><span class="params">(Context ctx)</span> </span>&#123;</span><br><span class="line">        Object sbservice = ctx.getSystemService(<span class="string">"statusbar"</span>);</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Class&lt;?&gt; statusBarManager = Class.forName(<span class="string">"android.app.StatusBarManager"</span>);</span><br><span class="line">            Method expand;</span><br><span class="line">            <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= <span class="number">17</span>) &#123;</span><br><span class="line">                expand = statusBarManager.getMethod(<span class="string">"expandNotificationsPanel"</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                expand = statusBarManager.getMethod(<span class="string">"expand"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            expand.invoke(sbservice);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="获取状态栏高度"><a href="#获取状态栏高度" class="headerlink" title="获取状态栏高度"></a>获取状态栏高度</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getStatusBarHeight</span><span class="params">(Context context)</span></span>&#123;</span><br><span class="line">        Class&lt;?&gt; c = <span class="keyword">null</span>;</span><br><span class="line">        Object obj = <span class="keyword">null</span>;</span><br><span class="line">        Field field = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">int</span> x = <span class="number">0</span>, statusBarHeight = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            c = Class.forName(<span class="string">"com.android.internal.R$dimen"</span>);</span><br><span class="line">            obj = c.newInstance();</span><br><span class="line">            field = c.getField(<span class="string">"status_bar_height"</span>);</span><br><span class="line">            x = Integer.parseInt(field.get(obj).toString());</span><br><span class="line">            statusBarHeight = context.getResources().getDimensionPixelSize(x);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e1) &#123;</span><br><span class="line">            e1.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> statusBarHeight;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ListView使用ViewHolder极简写法"><a href="#ListView使用ViewHolder极简写法" class="headerlink" title="ListView使用ViewHolder极简写法"></a><code>ListView</code>使用<code>ViewHolder</code>极简写法</h3><blockquote>
+<p>用起来非常简练，将ViewHolder隐于无形。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T extends View&gt; <span class="function">T <span class="title">getAdapterView</span><span class="params">(View convertView, <span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">        SparseArray&lt;View&gt; viewHolder = (SparseArray&lt;View&gt;) convertView.getTag();</span><br><span class="line">        <span class="keyword">if</span> (viewHolder == <span class="keyword">null</span>) &#123;</span><br><span class="line">            viewHolder = <span class="keyword">new</span> SparseArray&lt;View&gt;();</span><br><span class="line">            convertView.setTag(viewHolder);</span><br><span class="line">        &#125;</span><br><span class="line">        View childView = viewHolder.get(id);</span><br><span class="line">        <span class="keyword">if</span> (childView == <span class="keyword">null</span>) &#123;</span><br><span class="line">            childView = convertView.findViewById(id);</span><br><span class="line">            viewHolder.put(id, childView);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> (T) childView;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>用法:</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> position, View convertView, ViewGroup parent)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (convertView == <span class="keyword">null</span>) &#123;</span><br><span class="line">            convertView = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_feed_item, parent, <span class="keyword">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ImageView thumnailView = getAdapterView(convertView, R.id.video_thumbnail);</span><br><span class="line">        ImageView avatarView =  getAdapterView(convertView, R.id.user_avatar);</span><br><span class="line">        ImageView appIconView = getAdapterView(convertView, R.id.app_icon);</span><br></pre></td></tr></table></figure>
+<h3 id="设置Activity透明"><a href="#设置Activity透明" class="headerlink" title="设置Activity透明"></a>设置Activity透明</h3><blockquote>
+<p>说明：AppBaseTheme一般是你application指定的android:theme是啥这里就是啥，否则Activity内部的空间风格可能不一致。<br>用途：用于模拟Dialog效果，比如再Service中没法用Dialog，就可以用Activity来模拟。</p>
+</blockquote>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">name</span>=<span class="string">"TransparentActivity"</span> <span class="attr">parent</span>=<span class="string">"AppBaseTheme"</span>&gt;</span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowBackground"</span>&gt;</span>@android:color/transparent<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:colorBackgroundCacheHint"</span>&gt;</span>@null<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowIsTranslucent"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowNoTitle"</span>&gt;</span>true<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">item</span> <span class="attr">name</span>=<span class="string">"android:windowContentOverlay"</span>&gt;</span>@null<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="代码切换全屏"><a href="#代码切换全屏" class="headerlink" title="代码切换全屏"></a>代码切换全屏</h3><blockquote>
+<p>注意：切换到全屏时，底部的虚拟按键仍然是显示的。次方法可多次调用用于切换.<br>用途：播放器界面经常会用到.</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//切换到全屏</span></span><br><span class="line">        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);</span><br><span class="line">        getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//切换到非全屏</span></span><br><span class="line">        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);</span><br><span class="line">        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);</span><br></pre></td></tr></table></figure>
+<h3 id="调用开发者选项中显示触摸位置功能"><a href="#调用开发者选项中显示触摸位置功能" class="headerlink" title="调用开发者选项中显示触摸位置功能"></a>调用开发者选项中显示触摸位置功能</h3><blockquote>
+<p>设置1显示，设置0不显示。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android.provider.Settings.System.putInt(getContentResolver(), <span class="string">"show_touches"</span>, <span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="获取设备上已安装并且可启动的应用列表"><a href="#获取设备上已安装并且可启动的应用列表" class="headerlink" title="获取设备上已安装并且可启动的应用列表"></a>获取设备上已安装并且可启动的应用列表</h3><blockquote>
+<p>注意：使用<code>getInstalledApplications</code>会返回很多无法启动甚至没有图标的系统应用。<code>ResolveInfo.activityInfo.applicationInfo</code>也能取到你想要的数据。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Intent intent = <span class="keyword">new</span> Intent(Intent.ACTION_MAIN);</span><br><span class="line">            intent.addCategory(Intent.CATEGORY_LAUNCHER);</span><br><span class="line"></span><br><span class="line">            List&lt;ResolveInfo&gt; activities = getPackageManager().queryIntentActivities(intent, <span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<font size="1">本文摘抄自<a href="http://www.eoeandroid.com/thread-570919-1-1.html" target="_blank" rel="noopener">eoe论坛</a>,非本博原创。</font>
+
+      
+    </div>
+
+    
+      
+
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>夏末</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://notes.wanghao.work/2015-04-21-android-常用代码片段.html" title="android 常用代码片段">https://notes.wanghao.work/2015-04-21-android-常用代码片段.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015-04-06-备份Hexo博客源文件.html" rel="next" title="备份Hexo博客源文件">
+                <i class="fa fa-chevron-left"></i> 备份Hexo博客源文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015-04-24-Linux-学习笔记-软件包管理.html" rel="prev" title="Linux 学习笔记-软件包管理">
+                Linux 学习笔记-软件包管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="夏末">
+            
+              <p class="site-author-name" itemprop="name">夏末</p>
+              <p class="site-description motion-element" itemprop="description">Keep fucking the world</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">35</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/Mokasa__" target="_blank" title="Twitter" rel="external nofollow"><i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.instagram.com/___xiamo/" target="_blank" title="Instagram" rel="external nofollow"><i class="fa fa-fw fa-instagram"></i>Instagram</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/doublemine" target="_blank" title="GitHub" rel="external nofollow"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+            <div class="cc-license motion-element" itemprop="license">
+              <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" target="_blank" rel="external nofollow">
+                <img src="/images/cc-by-nc-sa.svg" alt="Creative Commons">
+              </a>
+            </div>
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.labradors.work/" title="Kevin" target="_blank">Kevin</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.kisence.com/" title="kisence" target="_blank">kisence</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#精确获取屏幕尺寸"><span class="nav-number">1.1.</span> <span class="nav-text">精确获取屏幕尺寸</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断设备是否是平板"><span class="nav-number">1.2.</span> <span class="nav-text">判断设备是否是平板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文字根据状态栏更改颜色"><span class="nav-number">1.3.</span> <span class="nav-text">文字根据状态栏更改颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背景色根据状态更改颜色"><span class="nav-number">1.4.</span> <span class="nav-text">背景色根据状态更改颜色</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动App默认的Activity"><span class="nav-number">1.5.</span> <span class="nav-text">启动App默认的Activity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算字宽"><span class="nav-number">1.6.</span> <span class="nav-text">计算字宽</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取应用程序下所有的Activity"><span class="nav-number">1.7.</span> <span class="nav-text">获取应用程序下所有的Activity</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测字符串中是否包含汉字"><span class="nav-number">1.8.</span> <span class="nav-text">检测字符串中是否包含汉字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检测字符串中只能包含-中文、数字、下划线-、横线"><span class="nav-number">1.9.</span> <span class="nav-text">检测字符串中只能包含:中文、数字、下划线(_)、横线(-)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查又没有应用程序来接受处理你发出的intent"><span class="nav-number">1.10.</span> <span class="nav-text">检查又没有应用程序来接受处理你发出的intent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用TransitionDrawable实现渐变效果"><span class="nav-number">1.11.</span> <span class="nav-text">使用TransitionDrawable实现渐变效果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扫描指定文件"><span class="nav-number">1.12.</span> <span class="nav-text">扫描指定文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dip转px"><span class="nav-number">1.13.</span> <span class="nav-text">Dip转px</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取已经安装的APK路径"><span class="nav-number">1.14.</span> <span class="nav-text">获取已经安装的APK路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多进程Preferences数据共享"><span class="nav-number">1.15.</span> <span class="nav-text">多进程Preferences数据共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#泛型ArrayList转数组"><span class="nav-number">1.16.</span> <span class="nav-text">泛型ArrayList转数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#保存回复ListView当前为位置"><span class="nav-number">1.17.</span> <span class="nav-text">保存回复ListView当前为位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用便携式热点和数据共享设置"><span class="nav-number">1.18.</span> <span class="nav-text">调用便携式热点和数据共享设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#格式化输出IP地址"><span class="nav-number">1.19.</span> <span class="nav-text">格式化输出IP地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件夹排序"><span class="nav-number">1.20.</span> <span class="nav-text">文件夹排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发送不重复的通知（Notification）"><span class="nav-number">1.21.</span> <span class="nav-text">发送不重复的通知（Notification）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码设置TextView的样式"><span class="nav-number">1.22.</span> <span class="nav-text">代码设置TextView的样式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ip地址转成8位16进制串"><span class="nav-number">1.23.</span> <span class="nav-text">ip地址转成8位16进制串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebView保留缩放功能但隐藏缩放控件"><span class="nav-number">1.24.</span> <span class="nav-text">WebView保留缩放功能但隐藏缩放控件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取网络类型名称"><span class="nav-number">1.25.</span> <span class="nav-text">获取网络类型名称</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从assets中读取文本和图片资源"><span class="nav-number">1.26.</span> <span class="nav-text">从assets中读取文本和图片资源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#展开、收起状态栏"><span class="nav-number">1.27.</span> <span class="nav-text">展开、收起状态栏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取状态栏高度"><span class="nav-number">1.28.</span> <span class="nav-text">获取状态栏高度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ListView使用ViewHolder极简写法"><span class="nav-number">1.29.</span> <span class="nav-text">ListView使用ViewHolder极简写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置Activity透明"><span class="nav-number">1.30.</span> <span class="nav-text">设置Activity透明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码切换全屏"><span class="nav-number">1.31.</span> <span class="nav-text">代码切换全屏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#调用开发者选项中显示触摸位置功能"><span class="nav-number">1.32.</span> <span class="nav-text">调用开发者选项中显示触摸位置功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取设备上已安装并且可启动的应用列表"><span class="nav-number">1.33.</span> <span class="nav-text">获取设备上已安装并且可启动的应用列表</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">夏末</span>
+
+  
+
+  
+</div>
+
+
+  
+
+
+
+
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" rel="external nofollow" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  
+  
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(function (item) {
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'jNtrKbh7n1iCujKSNNQ2AlH3',
+        appKey: 'l5SnKfDysKAOoMwfpVAFUDTR',
+        placeholder: 'Just go go',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("jNtrKbh7n1iCujKSNNQ2AlH3", "l5SnKfDysKAOoMwfpVAFUDTR");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.get('time'));
+            
+            counter.save(null, {
+              success: function(counter) {
+                
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            
+              var newcounter = new Counter();
+              /* Set ACL */
+              var acl = new AV.ACL();
+              acl.setPublicReadAccess(true);
+              acl.setPublicWriteAccess(true);
+              newcounter.setACL(acl);
+              /* End Set ACL */
+              newcounter.set("title", title);
+              newcounter.set("url", url);
+              newcounter.set("time", 1);
+              newcounter.save(null, {
+                success: function(newcounter) {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+                },
+                error: function(newcounter, error) {
+                  console.log('Failed to create');
+                }
+              });
+            
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=6.3.0"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=6.3.0"></script>
+
+
+  
+
+  
+  
+  
+  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
+  <script type="text/javascript">
+  
+    bookmark.scrollToMark('auto', "#更多");
+  
+  </script>
+
+
+  
+
+</body>
+</html>
